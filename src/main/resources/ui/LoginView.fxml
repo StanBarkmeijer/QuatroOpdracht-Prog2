@@ -50,7 +50,7 @@
       <PasswordField fx:id="passwordField" layoutX="182.0" layoutY="247.0" prefHeight="26.0" prefWidth="222.0" />
       <Button fx:id="submitButton" onAction="#handleSubmitButtonAction" layoutX="181.0" layoutY="302.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="222.0" text="Sign in" />
       <Label layoutX="182.0" layoutY="347.0" prefHeight="18.0" prefWidth="70.0" text="No account? " />
-      <Label layoutX="257.0" layoutY="347.0" prefHeight="18.0" prefWidth="70.0" text="Sign up here." underline="true" />
+      <Label fx:id="signUp" onMouseClicked="#handleSignUpClick" layoutX="257.0" layoutY="347.0" prefHeight="18.0" prefWidth="70.0" text="Sign up here." underline="true" />
       <Label layoutX="253.0" layoutY="91.0" prefHeight="46.0" prefWidth="79.0" text="Sign in" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
