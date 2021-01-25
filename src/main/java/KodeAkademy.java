@@ -22,6 +22,7 @@ public class KodeAkademy extends Application {
     public static void main(String[] args) {
 
         DatabaseConnect connection = new DatabaseConnect();
+        if (connection.getConnection() != null) System.out.println("Connection to the database succesful");
 
         launch(args);
 

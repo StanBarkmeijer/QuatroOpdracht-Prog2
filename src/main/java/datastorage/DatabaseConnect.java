@@ -20,8 +20,6 @@ public class DatabaseConnect {
 
         try {
             this.connection = DriverManager.getConnection(connectionURI, DB_USERNAME, DB_PASSWORD);
-
-            System.out.println("Connection successful!");
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
