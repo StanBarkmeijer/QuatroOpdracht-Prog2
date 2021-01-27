@@ -14,24 +14,39 @@ public class Cursist {
     private String lastName;
     private Date birthDay;
     private String gender;
-    private Address addres;
+    private Address address;
 
+    /**
+     * Cursist constructor.
+     * @param id The cursist ID
+     * @param email The cursist E-Mail
+     * @param firstName The cursist first name
+     * @param lastName The cursist last name
+     * @param birthDay The cursist birthday
+     * @param gender The cursist gender
+     * @param address The cursist address
+     */
     public Cursist(int id,
                    String email,
                    String firstName,
                    String lastName,
                    Date birthDay,
                    String gender,
-                   Address addres) {
+                   Address address) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = birthDay;
         this.gender = gender;
-        this.addres = addres;
+        this.address = address;
     }
 
+    /**
+     * Cursist constructor from a SQL ResultSet
+     * @param rs SQL ResultSet
+     * @throws SQLException SQL Exception
+     */
     public Cursist(ResultSet rs) throws SQLException {
         this.id = rs.getInt("id");
         this.email = rs.getString("Email");
@@ -39,7 +54,7 @@ public class Cursist {
         this.lastName = rs.getString("LastName");
         this.birthDay = rs.getDate("BirthDay");
 
-        this.addres = AddressDAO.getAddress(rs.getInt("AddressID"));
+        this.address = AddressDAO.getAddress(rs.getInt("AddressID"));
     }
 
     @Override
@@ -51,7 +66,7 @@ public class Cursist {
                 ", lastName='" + lastName + '\'' +
                 ", birthDay=" + birthDay +
                 ", gender='" + gender + '\'' +
-                ", addres=" + addres +
+                ", address=" + address +
                 '}';
     }
 
@@ -79,7 +94,7 @@ public class Cursist {
         return gender;
     }
 
-    public Address getAddres() {
-        return addres;
+    public Address getAddress() {
+        return address;
     }
 }

@@ -7,7 +7,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import utils.ResponseHandler;
 
-import javax.lang.model.type.ErrorType;
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
 
@@ -19,9 +18,7 @@ public class MainViewController {
     @FXML
     public void initialize() {
         try {
-            Preferences pref = Preferences.userRoot();
-            int id = pref.getInt("user", 0);
-            Cursist user = CursistDAO.getCursistFromID(id);
+            Cursist user = CursistDAO.getLoggedInCursist();
 
             email.setText("Logged in as: " + user.getEmail());
         } catch (SQLException throwables) {

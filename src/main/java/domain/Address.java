@@ -13,6 +13,16 @@ public class Address {
     private String placeOfResidency;
     private String country;
 
+    /**
+     * Address constructor
+     * @param id The address ID
+     * @param street The street
+     * @param houseNumber The house number
+     * @param additional The address additional
+     * @param postalCode The postal code
+     * @param placeOfResidency The residency
+     * @param country The country
+     */
     public Address(int id,
                    String street,
                    int houseNumber,
@@ -29,6 +39,11 @@ public class Address {
         this.country = country;
     }
 
+    /**
+     * Address constructor from a SQL ResultSet
+     * @param rs rs SQL ResultSet
+     * @throws SQLException SQL Exception
+     */
     public Address(ResultSet rs) throws SQLException {
         this.id = rs.getInt("addressId");
         this.street = rs.getString("Street");
