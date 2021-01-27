@@ -1,6 +1,8 @@
 package controllers;
 
-import datastorage.DatabaseConnect;
+import datastorage.CursistDAO;
+import domain.Address;
+import domain.Cursist;
 import javafx.scene.control.*;
 import utils.ResponseHandler;
 
@@ -15,10 +17,8 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.prefs.Preferences;
 
 public class LoginController {
 
@@ -31,12 +31,6 @@ public class LoginController {
     @FXML
     private Label signUp;
 
-//    private User user;
-
-//    public static User getUser () {
-//        return this.user;
-//    }
-
     @FXML
     public void handleSubmitButtonAction(ActionEvent event) {
         Window owner = submitButton.getScene().getWindow();
@@ -44,24 +38,21 @@ public class LoginController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        String query = String.format("SELECT * FROM User WHERE EMail='%s' AND Password='%s'", email, password);
-
         try {
-            Map<String, String> map = new HashMap<>();
+            Cursist user = CursistDAO.getCursistFromEmailAndPassword(email, password);
 
-            DatabaseConnect databaseConnect = new DatabaseConnect();
-            ResultSet rs = databaseConnect.getConnection().prepareStatement(query).executeQuery();
-
-            while (rs.next()) {
-                map.put(rs.getString("EMail"), rs.getString("Password"));
+            if (user == null) {
+                ResponseHandler.handleError(Alert.AlertType.ERROR, "Login error", "Account was not found.");
+                return;
             }
 
-            if (map.size() == 1) {
-//                this.user = new User(rs);
-                ResponseHandler.handleError(Alert.AlertType.INFORMATION, "Login message", "Successfully logged in");
-            } else {
-                ResponseHandler.handleError(Alert.AlertType.WARNING, "Login warning", "Your credentials are wrong");
-            }
+            Preferences preferences = Preferences.userRoot();
+            preferences.put("user", user.getId() + "");
+
+            ResponseHandler.handleError(Alert.AlertType.INFORMATION,
+                    "Login message",
+                    "Successfully logged in to " + CursistDAO.getCursistFromID(Integer.parseInt(preferences.get("user", "null"))).getEmail());
+            System.out.println(user.toString());
         } catch (SQLException e) {
             ResponseHandler.handleError(Alert.AlertType.ERROR, "Something went wrong with the SQL statement", e.getMessage());
         }

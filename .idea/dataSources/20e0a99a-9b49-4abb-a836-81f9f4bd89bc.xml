@@ -1024,5 +1024,90 @@
       <ObjectGrants>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER|u55592p52804\_stan:null
 </ObjectGrants>
     </user>
+    <table id="327" parent="3" name="Address"/>
+    <table id="328" parent="3" name="Cursist"/>
+    <column id="329" parent="327" name="addressId">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="330" parent="327" name="street">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="331" parent="327" name="houseNumber">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="332" parent="327" name="additional">
+      <Position>4</Position>
+      <DataType>varchar(10)|0s</DataType>
+    </column>
+    <column id="333" parent="327" name="postalCode">
+      <Position>5</Position>
+      <DataType>varchar(10)|0s</DataType>
+    </column>
+    <column id="334" parent="327" name="placeOfResidency">
+      <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="335" parent="327" name="country">
+      <Position>7</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <key id="336" parent="327" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>addressId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="337" parent="328" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="338" parent="328" name="email">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="339" parent="328" name="Password">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="340" parent="328" name="firstName">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="341" parent="328" name="lastName">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="342" parent="328" name="birthDay">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="343" parent="328" name="gender">
+      <Position>7</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="344" parent="328" name="addressId">
+      <Position>8</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <index id="345" parent="328" name="fk_address">
+      <ColNames>addressId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="346" parent="328" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="347" parent="328" name="fk_address">
+      <ColNames>addressId</ColNames>
+      <RefTableName>Address</RefTableName>
+      <RefColNames>addressId</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>
