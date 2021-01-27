@@ -23,7 +23,7 @@ public class MainViewController {
             int id = pref.getInt("user", 0);
             Cursist user = CursistDAO.getCursistFromID(id);
 
-            email.setText(user.getEmail());
+            email.setText("Logged in as: " + user.getEmail());
         } catch (SQLException throwables) {
             ResponseHandler.handleError(Alert.AlertType.ERROR, "Something went wrong", throwables.getMessage());
         }
