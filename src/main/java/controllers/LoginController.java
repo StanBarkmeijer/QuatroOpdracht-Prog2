@@ -32,7 +32,7 @@ public class LoginController {
     private Label signUp;
 
     @FXML
-    public void handleSubmitButtonAction(ActionEvent event) {
+    public void handleSubmitButtonAction(ActionEvent event) throws IOException {
         Window owner = submitButton.getScene().getWindow();
 
         String email = emailField.getText();
@@ -49,9 +49,16 @@ public class LoginController {
             Preferences preferences = Preferences.userRoot();
             preferences.put("user", user.getId() + "");
 
-            ResponseHandler.handleError(Alert.AlertType.INFORMATION,
-                    "Login message",
-                    "Successfully logged in to " + CursistDAO.getCursistFromID(Integer.parseInt(preferences.get("user", "null"))).getEmail());
+//            ResponseHandler.handleError(Alert.AlertType.INFORMATION,
+//                    "Login message",
+//                    "Successfully logged in to " + CursistDAO.getCursistFromID(Integer.parseInt(preferences.get("user", "null"))).getEmail());
+
+            Stage stage =  (Stage) signUp.getScene().getWindow();
+            URL url = getClass().getResource("../ui/MainView.fxml");
+            Parent root = FXMLLoader.load(url);
+
+            stage.setScene(new Scene(root));
+
             System.out.println(user.toString());
         } catch (SQLException e) {
             ResponseHandler.handleError(Alert.AlertType.ERROR, "Something went wrong with the SQL statement", e.getMessage());
