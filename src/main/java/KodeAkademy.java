@@ -14,7 +14,7 @@ public class KodeAkademy extends Application {
         URL url = getClass().getResource("ui/LoginView.fxml");
         Parent root = FXMLLoader.load(url);
 
-        stage.setTitle("KodeAkademy | Made by Stan Barkmeijer (2153846) & Kalle van de Visser ()");
+        stage.setTitle("KodeAkademy | Made by Stan Barkmeijer (2153846) & Kalle van de Visser (2177927)");
         stage.setScene(new Scene(root, 600, 600));
         stage.show();
     }
@@ -22,7 +22,7 @@ public class KodeAkademy extends Application {
     public static void main(String[] args) {
 
         DatabaseConnect connection = new DatabaseConnect();
-        if (connection.getConnection() != null) System.out.println("Connection to the database succesful");
+        if (connection.getConnection() != null) System.out.println("Connection to the database successful");
 
         launch(args);
 
