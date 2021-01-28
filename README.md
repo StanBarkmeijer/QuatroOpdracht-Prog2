@@ -8,13 +8,17 @@ Kalle van de Visser (2177927) & Stan Barkmeijer (2153846)
 
 ## Installation
 
-Install [JavaFX Version 15.0.1](https://gluonhq.com/products/javafx/) and extract the javafx-sdk-15.0.1 folder to a suited location on your PC (like C:/Program Files)
+Install [JavaFX Version 15.0.1](https://gluonhq.com/products/javafx/)
+and extract the javafx-sdk-15.0.1 folder to a suited location on your PC (like C:/Program Files)
+
+Download the latest *.jar* release of the program here [Download](https://github.com/StanBarkmeijer/QuatroOpdracht-Prog2/releases), 
+extract the folder to a suited location on your PC (like Desktop/KodeAkademy/)
 
 ## Launch the program
 
 How to open the program
-- Open the project folder, and navigate to out/artifacts/QuatroOpdracht-Prog2_jar/
-- In the folder window, click here ![Image](https://image.prntscr.com/image/CK1DrBxkRFmTV3YfzSe9MQ.png)
+- Open the project folder
+- In the folder window, click here ![Image](https://image.prntscr.com/image/sal-Lmv-TguFp43bTezv-g.png)
 - Type in *cmd* and press Enter on your keyboard
 - Type the following in your CMD prompt (replace what's between [] with the proper path)
 ```bash 
