@@ -8,8 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:controller="controllers.SignUpController"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="742.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #090979, #00d4ff);" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="742.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #E76F51, #F69982);" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
    <children>
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="554.0" layoutX="82.0" layoutY="77.0" stroke="TRANSPARENT" strokeType="INSIDE" width="582.0" />
       <Label layoutX="329.0" layoutY="116.0" prefHeight="46.0" prefWidth="87.0" text="Sign up" textAlignment="CENTER">
@@ -35,7 +34,7 @@
       <TextField fx:id="countryField" layoutX="196.0" layoutY="416.0" />
       <Label layoutX="196.0" layoutY="462.0" text="Password" />
       <PasswordField fx:id="passwordField" layoutX="196.0" layoutY="480.0" />
-      <Button fx:id="signUpButton" onAction="#handleSignUpButton" layoutX="343.0" layoutY="548.0" mnemonicParsing="false" text="Sign up" />
-      <Button fx:id="cancelButton" onAction="#cancelButton" layoutX="523.0" layoutY="548.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="signUpButton" layoutX="343.0" layoutY="548.0" mnemonicParsing="false" onAction="#handleSignUpButton" text="Sign up" />
+      <Button fx:id="cancelButton" layoutX="523.0" layoutY="548.0" mnemonicParsing="false" onAction="#cancelButton" text="Cancel" />
    </children>
 </AnchorPane>

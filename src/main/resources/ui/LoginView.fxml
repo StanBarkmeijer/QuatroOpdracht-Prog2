@@ -40,17 +40,16 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:controller="controllers.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="586.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #090979, #00d4ff);" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="586.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #E76F51, #F69982);" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="327.0" layoutX="129.0" layoutY="74.0" stroke="TRANSPARENT" strokeType="INSIDE" width="327.0" />
       <Label layoutX="182.0" layoutY="145.0" prefHeight="18.0" prefWidth="50.0" text="E-Mail" />
       <TextField fx:id="emailField" layoutX="182.0" layoutY="170.0" prefHeight="26.0" prefWidth="222.0" />
       <Label layoutX="182.0" layoutY="220.0" prefHeight="18.0" prefWidth="50.0" text="Password" />
       <PasswordField fx:id="passwordField" layoutX="182.0" layoutY="247.0" prefHeight="26.0" prefWidth="222.0" />
-      <Button fx:id="submitButton" onAction="#handleSubmitButtonAction" layoutX="181.0" layoutY="302.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="222.0" text="Sign in" />
+      <Button fx:id="submitButton" layoutX="181.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" prefHeight="26.0" prefWidth="222.0" text="Sign in" />
       <Label layoutX="182.0" layoutY="347.0" prefHeight="18.0" prefWidth="70.0" text="No account? " />
-      <Label fx:id="signUp" onMouseClicked="#handleSignUpClick" layoutX="257.0" layoutY="347.0" prefHeight="18.0" prefWidth="70.0" text="Sign up here." underline="true" />
+      <Label fx:id="signUp" layoutX="257.0" layoutY="347.0" onMouseClicked="#handleSignUpClick" prefHeight="18.0" prefWidth="70.0" text="Sign up here." underline="true" />
       <Label layoutX="253.0" layoutY="91.0" prefHeight="46.0" prefWidth="79.0" text="Sign in" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
