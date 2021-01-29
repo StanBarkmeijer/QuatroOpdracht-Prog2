@@ -19,20 +19,30 @@ import java.util.prefs.Preferences;
 
 public class MainViewController {
 
+    private CursistDAO cursistDAO;
+
     @FXML
     private Label firstName;
     @FXML
     private Button signOut;
 
-    @FXML
-    public void initialize() throws Exception {
-        try {
-            Cursist user = CursistDAO.getLoggedInCursist();
+    public MainViewController() {
+        this.cursistDAO = new CursistDAO();
+    }
 
-            firstName.setText("Logged in as: " + user.getFirstName());
-        } catch (SQLException throwables) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Something went wrong", throwables.getMessage());
+    @FXML
+    public void initialize() {
+        int id = Preferences.userRoot().getInt("user", 0);
+
+        if (id == 0) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR,
+                    "Not logged in",
+                    "You are not logged in, please try again after signing out and logging in again");
         }
+
+        Cursist user = cursistDAO.get(id);
+
+        firstName.setText("Logged in as: " + user.getFirstName());
     }
 
     @FXML

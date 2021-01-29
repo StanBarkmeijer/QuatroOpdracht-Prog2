@@ -1,66 +1,104 @@
 package datastorage;
 
-import domain.Address;
 import domain.Cursist;
+import javafx.scene.control.Alert;
+import utils.ResponseHandler;
 
+import javax.lang.model.type.ErrorType;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.Preferences;
 
-public class CursistDAO {
+public class CursistDAO implements DAO<Cursist>{
 
-    /**
-     * Return the Cursist from the the logged in cache
-     * @return Cursist
-     * @throws SQLException SQL Exception
-     */
-    public static Cursist getLoggedInCursist() throws SQLException {
-        DatabaseConnect databaseConnect = new DatabaseConnect();
-        int id = Preferences.userRoot().getInt("user", 0);
+    private DatabaseConnect databaseConnect;
 
-        if (id == 0) {
-            return null;
+    public CursistDAO() {
+        this.databaseConnect = new DatabaseConnect();
+    }
+
+    public Cursist login(String email, String password) {
+        Cursist cursist = null;
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+
+            final String query = String.format("SELECT * FROM Cursist WHERE EMail='%s' AND Password='%s'", email, password);
+
+            ResultSet rs = connection.prepareStatement(query).executeQuery(query);
+
+            rs.next();
+
+            cursist = new Cursist(rs);
+
+            connection.close();
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all users", error.getMessage());
         }
 
-        String query = String.format("SELECT * FROM Cursist WHERE ID=%s", id);
-        ResultSet rs = databaseConnect.getConnection().prepareStatement(query).executeQuery();
-
-        rs.next();
-
-        return new Cursist(rs);
+        return cursist;
     }
 
-    /**
-     * Return the Address with the email and password
-     * @param email The Cursist's email
-     * @param password The Cursist's password
-     * @return Cursist
-     * @throws SQLException SQL Exception
-     */
-    public static Cursist getCursistFromEmailAndPassword(String email, String password) throws SQLException {
-        DatabaseConnect databaseConnect = new DatabaseConnect();
-        String query = String.format("SELECT * FROM Cursist WHERE EMail='%s' AND Password='%s'", email, password);
-        ResultSet rs = databaseConnect.getConnection().prepareStatement(query).executeQuery();
+    @Override
+    public List<Cursist> getAll() {
+        ArrayList<Cursist> list = new ArrayList<>();
 
-        rs.next();
+        try {
+            Connection connection = databaseConnect.getConnection();
 
-        return new Cursist(rs);
+            final String query = "SELECT * FROM Cursist";
+
+            ResultSet rs = connection.prepareStatement(query).executeQuery(query);
+
+            while (rs.next()) {
+                list.add(new Cursist(rs));
+            }
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all users", error.getMessage());
+        }
+
+        return list;
     }
 
-    /**
-     * Return the Address from the Cursist ID
-     * @param id The Cursist's ID
-     * @return Cursist
-     * @throws SQLException SQL Exception
-     */
-    public static Cursist getCursistFromID(int id) throws SQLException {
-        DatabaseConnect databaseConnect = new DatabaseConnect();
-        String query = "SELECT * FROM Cursist WHERE ID=" + id;
-        ResultSet rs = databaseConnect.getConnection().prepareStatement(query).executeQuery();
+    @Override
+    public Cursist get(int id) {
+        Cursist cursist = null;
 
-        rs.next();
+        try {
+            Connection connection = databaseConnect.getConnection();
 
-        return new Cursist(rs);
+            final String query = "SELECT * FROM Cursist\n" +
+                    "INNER JOIN Address\n" +
+                    "ON Cursist.addressId = Address.addressId\n" +
+                    "WHERE Cursist.id = " + id;
+
+            ResultSet rs = connection.prepareStatement(query).executeQuery(query);
+
+            rs.next();
+
+            cursist = new Cursist(rs);
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all users", error.getMessage());
+        }
+
+        return cursist;
     }
 
+    @Override
+    public void save(Cursist cursist) {
+
+    }
+
+    @Override
+    public void update(Cursist cursist, String[] params) {
+
+    }
+
+    @Override
+    public void delete(Cursist cursist) {
+
+    }
 }

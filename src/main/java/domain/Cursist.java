@@ -54,7 +54,7 @@ public class Cursist {
         this.lastName = rs.getString("LastName");
         this.birthDay = rs.getDate("BirthDay");
 
-        this.address = AddressDAO.getAddress(rs.getInt("AddressID"));
+        this.address = new AddressDAO().get(rs.getInt("AddressID"));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package controllers;
 
 import datastorage.CursistDAO;
-import domain.Address;
 import domain.Cursist;
 import javafx.scene.control.*;
 import utils.ResponseHandler;
@@ -13,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +31,8 @@ public class LoginController {
 
     @FXML
     public void handleSubmitButtonAction(ActionEvent event) throws IOException {
+        CursistDAO cursistDAO = new CursistDAO();
+
         String email = emailField.getText();
         String password = passwordField.getText();
 
@@ -41,30 +41,26 @@ public class LoginController {
             return;
         }
 
-        try {
-            Cursist user = CursistDAO.getCursistFromEmailAndPassword(email, password);
+        Cursist user = cursistDAO.login(email, password);
 
-            if (user == null) {
-                ResponseHandler.handleError(Alert.AlertType.ERROR, "Login error", "Account was not found.");
-                return;
-            }
-
-            Preferences preferences = Preferences.userRoot();
-            preferences.put("user", user.getId() + "");
-
-            ResponseHandler.handleError(Alert.AlertType.INFORMATION,
-                    "Login message",
-                    "Successfully logged in to " + CursistDAO.getLoggedInCursist().getEmail() +
-                            "\nClick the button to continue to the next window");
-
-            Stage stage =  (Stage) signUp.getScene().getWindow();
-            URL url = getClass().getResource("../ui/MainView.fxml");
-            Parent root = FXMLLoader.load(url);
-
-            stage.setScene(new Scene(root));
-        } catch (SQLException e) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Something went wrong with the SQL statement", e.getMessage());
+        if (user == null) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Login error", "Account was not found.");
+            return;
         }
+
+        Preferences preferences = Preferences.userRoot();
+        preferences.put("user", user.getId() + "");
+
+        ResponseHandler.handleError(Alert.AlertType.INFORMATION,
+                "Login message",
+                "Successfully logged in to " + user.getEmail() +
+                        "\nClick the button to continue to the next window");
+
+        Stage stage =  (Stage) signUp.getScene().getWindow();
+        URL url = getClass().getResource("../ui/MainView.fxml");
+        Parent root = FXMLLoader.load(url);
+
+        stage.setScene(new Scene(root));
     }
 
     @FXML
