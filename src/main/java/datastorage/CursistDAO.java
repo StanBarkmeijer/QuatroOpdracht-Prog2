@@ -123,6 +123,20 @@ public class CursistDAO implements DAO<Cursist>{
 
     @Override
     public boolean delete(Cursist cursist) {
-        return true;
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("DELETE FROM Cursist " +
+                    "WHERE CursistID=?");
+
+            query.setInt(1, cursist.getCursistId());
+
+            query.execute();
+
+            return true;
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't insert user", error.getMessage());
+            return false;
+        }
     }
 }
