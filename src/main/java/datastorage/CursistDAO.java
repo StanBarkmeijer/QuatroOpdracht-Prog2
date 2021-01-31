@@ -88,15 +88,41 @@ public class CursistDAO implements DAO<Cursist>{
     }
 
     @Override
-    public void save(Cursist cursist) {}
+    public boolean save(Cursist cursist) {
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("INSERT INTO Cursist " +
+                    "(Email, FirstName, LastName, BirthDay, Geslacht, Password, Street, Number, PostalCode, Residency, Country)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    @Override
-    public void update(Cursist cursist, String[] params) {
+            query.setString(1, cursist.getEmail());
+            query.setString(2, cursist.getFirstName());
+            query.setString(3, cursist.getLastName());
+            query.setDate(4, new java.sql.Date(cursist.getBirthDay().getTime()));
+            query.setString(5, cursist.getGender());
+            query.setString(6, cursist.getPassword());
+            query.setString(7, cursist.getStreet());
+            query.setInt(8, cursist.getNumber());
+            query.setString(9, cursist.getPostalCode());
+            query.setString(10, cursist.getResidency());
+            query.setString(11, cursist.getCountry());
 
+            query.execute();
+
+            return true;
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't insert user", error.getMessage());
+            return false;
+        }
     }
 
     @Override
-    public void delete(Cursist cursist) {
+    public boolean update(Cursist cursist, String[] params) {
+        return true;
+    }
 
+    @Override
+    public boolean delete(Cursist cursist) {
+        return true;
     }
 }

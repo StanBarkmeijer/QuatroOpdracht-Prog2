@@ -6,8 +6,8 @@ public interface DAO<T> {
 
     List<T> getAll();
     T get(int id);
-    void save(T t);
-    void update(T t, String[] params);
-    void delete(T t);
+    boolean save(T t);
+    boolean update(T t, String[] params);
+    boolean delete(T t);
 
 }

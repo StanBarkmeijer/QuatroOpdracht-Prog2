@@ -12,29 +12,30 @@ public class Cursist {
     private String lastName;
     private Date birthDay;
     private String gender;
+    private String password;
     private String street;
     private int number;
     private String postalCode;
     private String residency;
     private String country;
 
-    public Cursist(int cursistId,
-                   String email,
+    public Cursist(String email,
                    String firstName,
                    String lastName,
                    Date birthDay,
                    String gender,
+                   String password,
                    String street,
                    int number,
                    String postalCode,
                    String residency,
                    String country) {
-        this.cursistId = cursistId;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = birthDay;
         this.gender = gender;
+        this.password = password;
         this.street = street;
         this.number = number;
         this.postalCode = postalCode;
@@ -54,6 +55,7 @@ public class Cursist {
         this.firstName = rs.getString("FirstName");
         this.lastName = rs.getString("LastName");
         this.birthDay = rs.getDate("BirthDay");
+        this.password = rs.getString("Password");
         this.street = rs.getString("Street");
         this.number = rs.getInt("Number");
         this.postalCode = rs.getString("PostalCode");
@@ -83,6 +85,10 @@ public class Cursist {
 
     public String getGender() {
         return gender;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getStreet() {
