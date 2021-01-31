@@ -28,6 +28,8 @@ public class CursistDAO implements DAO<Cursist>{
 
             final String query = String.format("SELECT * FROM Cursist WHERE EMail='%s' AND Password='%s'", email, password);
 
+            System.out.println(query);
+
             ResultSet rs = connection.prepareStatement(query).executeQuery(query);
 
             rs.next();
@@ -36,7 +38,7 @@ public class CursistDAO implements DAO<Cursist>{
 
             connection.close();
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all users", error.getMessage());
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't login", error.getMessage());
         }
 
         return cursist;
@@ -49,7 +51,9 @@ public class CursistDAO implements DAO<Cursist>{
         try {
             Connection connection = databaseConnect.getConnection();
 
-            final String query = "SELECT * FROM Cursist";
+            final String query = "SELECT * FROM Cursist\n" +
+                    "INNER JOIN Address\n" +
+                    "ON Cursist.addressId = address.addressId";
 
             ResultSet rs = connection.prepareStatement(query).executeQuery(query);
 
@@ -73,7 +77,9 @@ public class CursistDAO implements DAO<Cursist>{
             final String query = "SELECT * FROM Cursist\n" +
                     "INNER JOIN Address\n" +
                     "ON Cursist.addressId = Address.addressId\n" +
-                    "WHERE Cursist.id = " + id;
+                    "WHERE Cursist.cursistId = " + id;
+
+            System.out.println(query);
 
             ResultSet rs = connection.prepareStatement(query).executeQuery(query);
 
@@ -81,7 +87,7 @@ public class CursistDAO implements DAO<Cursist>{
 
             cursist = new Cursist(rs);
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all users", error.getMessage());
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get user with ID: " + id, error.getMessage());
         }
 
         return cursist;

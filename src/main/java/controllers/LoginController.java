@@ -49,7 +49,7 @@ public class LoginController {
         }
 
         Preferences preferences = Preferences.userRoot();
-        preferences.put("user", user.getId() + "");
+        preferences.put("user", user.getCursistId() + "");
 
         ResponseHandler.handleError(Alert.AlertType.INFORMATION,
                 "Login message",

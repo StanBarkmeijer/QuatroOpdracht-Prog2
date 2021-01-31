@@ -45,6 +45,13 @@
             <artifactId>javafx-fxml</artifactId>
             <version>11</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-agroal</artifactId>
+            <version>5.4.27.Final</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
 
 </project>

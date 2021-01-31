@@ -5,37 +5,37 @@ import java.sql.SQLException;
 
 public class Address {
 
-    private int id;
+    private int addressId;
     private String street;
-    private int houseNumber;
-    private String additional;
+    private int number;
+    private String addition;
     private String postalCode;
-    private String placeOfResidency;
+    private String residency;
     private String country;
 
     /**
      * Address constructor
-     * @param id The address ID
+     * @param addressId The address ID
      * @param street The street
-     * @param houseNumber The house number
-     * @param additional The address additional
+     * @param number The house number
+     * @param addition The address additional
      * @param postalCode The postal code
-     * @param placeOfResidency The residency
+     * @param residency The residency
      * @param country The country
      */
-    public Address(int id,
+    public Address(int addressId,
                    String street,
-                   int houseNumber,
-                   String additional,
+                   int number,
+                   String addition,
                    String postalCode,
-                   String placeOfResidency,
+                   String residency,
                    String country) {
-        this.id = id;
+        this.addressId = addressId;
         this.street = street;
-        this.houseNumber = houseNumber;
-        this.additional = additional;
+        this.number = number;
+        this.addition = addition;
         this.postalCode = postalCode;
-        this.placeOfResidency = placeOfResidency;
+        this.residency = residency;
         this.country = country;
     }
 
@@ -45,50 +45,50 @@ public class Address {
      * @throws SQLException SQL Exception
      */
     public Address(ResultSet rs) throws SQLException {
-        this.id = rs.getInt("addressId");
+        this.addressId = rs.getInt("addressId");
         this.street = rs.getString("Street");
-        this.houseNumber = rs.getInt("HouseNumber");
-        this.additional = rs.getString("additional");
+        this.number = rs.getInt("number");
+        this.addition = rs.getString("addition");
         this.postalCode = rs.getString("postalCode");
-        this.placeOfResidency = rs.getString("placeOfResidency");
+        this.residency = rs.getString("residency");
         this.country = rs.getString("country");
     }
 
     @Override
     public String toString() {
         return "Address{" +
-                "id=" + id +
+                "addressId=" + addressId +
                 ", street='" + street + '\'' +
-                ", houseNumber=" + houseNumber +
-                ", additional='" + additional + '\'' +
+                ", number=" + number +
+                ", addition='" + addition + '\'' +
                 ", postalCode='" + postalCode + '\'' +
-                ", placeOfResidency='" + placeOfResidency + '\'' +
+                ", residency='" + residency + '\'' +
                 ", country='" + country + '\'' +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getAddressId() {
+        return addressId;
     }
 
     public String getStreet() {
         return street;
     }
 
-    public int getHouseNumber() {
-        return houseNumber;
+    public int getNumber() {
+        return number;
     }
 
-    public String getAdditional() {
-        return additional;
+    public String getAddition() {
+        return addition;
     }
 
     public String getPostalCode() {
         return postalCode;
     }
 
-    public String getPlaceOfResidency() {
-        return placeOfResidency;
+    public String getResidency() {
+        return residency;
     }
 
     public String getCountry() {

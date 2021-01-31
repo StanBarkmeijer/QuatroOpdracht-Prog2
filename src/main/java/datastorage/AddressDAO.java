@@ -26,7 +26,7 @@ public class AddressDAO implements DAO<Address> {
         try {
             Connection connection = databaseConnect.getConnection();
 
-            final String query = "SELECT * FROM Cursist";
+            final String query = "SELECT * FROM Address";
 
             ResultSet rs = connection.prepareStatement(query).executeQuery(query);
 
@@ -34,7 +34,7 @@ public class AddressDAO implements DAO<Address> {
                 list.add(new Address(rs));
             }
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all users", error.getMessage());
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all addresses", error.getMessage());
         }
 
         return list;
@@ -55,7 +55,7 @@ public class AddressDAO implements DAO<Address> {
 
             address = new Address(rs);
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all users", error.getMessage());
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get address with ID: " + id, error.getMessage());
         }
 
         return address;

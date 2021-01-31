@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Cursist {
 
-    private int id;
+    private int cursistId;
     private String email;
     private String firstName;
     private String lastName;
@@ -18,7 +18,7 @@ public class Cursist {
 
     /**
      * Cursist constructor.
-     * @param id The cursist ID
+     * @param cursistId The cursist ID
      * @param email The cursist E-Mail
      * @param firstName The cursist first name
      * @param lastName The cursist last name
@@ -26,14 +26,14 @@ public class Cursist {
      * @param gender The cursist gender
      * @param address The cursist address
      */
-    public Cursist(int id,
+    public Cursist(int cursistId,
                    String email,
                    String firstName,
                    String lastName,
                    Date birthDay,
                    String gender,
                    Address address) {
-        this.id = id;
+        this.cursistId = cursistId;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -48,7 +48,7 @@ public class Cursist {
      * @throws SQLException SQL Exception
      */
     public Cursist(ResultSet rs) throws SQLException {
-        this.id = rs.getInt("id");
+        this.cursistId = rs.getInt("cursistId");
         this.email = rs.getString("Email");
         this.firstName = rs.getString("FirstName");
         this.lastName = rs.getString("LastName");
@@ -60,7 +60,7 @@ public class Cursist {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "cursistId=" + cursistId +
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -70,8 +70,8 @@ public class Cursist {
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getCursistId() {
+        return cursistId;
     }
 
     public String getEmail() {
