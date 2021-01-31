@@ -5,9 +5,7 @@ import javafx.scene.control.Alert;
 import utils.ResponseHandler;
 
 import javax.lang.model.type.ErrorType;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.Preferences;
@@ -25,12 +23,12 @@ public class CursistDAO implements DAO<Cursist>{
 
         try {
             Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM Cursist WHERE EMail=? AND Password=?");
 
-            final String query = String.format("SELECT * FROM Cursist WHERE EMail='%s' AND Password='%s'", email, password);
+            query.setString(1, email);
+            query.setString(2, password);
 
-            System.out.println(query);
-
-            ResultSet rs = connection.prepareStatement(query).executeQuery(query);
+            ResultSet rs = query.executeQuery();
 
             rs.next();
 
@@ -73,15 +71,11 @@ public class CursistDAO implements DAO<Cursist>{
 
         try {
             Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM Cursist WHERE CursistID=?");
 
-            final String query = "SELECT * FROM Cursist\n" +
-                    "INNER JOIN Address\n" +
-                    "ON Cursist.addressId = Address.addressId\n" +
-                    "WHERE Cursist.cursistId = " + id;
+            query.setInt(1, id);
 
-            System.out.println(query);
-
-            ResultSet rs = connection.prepareStatement(query).executeQuery(query);
+            ResultSet rs = query.executeQuery();
 
             rs.next();
 
@@ -94,9 +88,7 @@ public class CursistDAO implements DAO<Cursist>{
     }
 
     @Override
-    public void save(Cursist cursist) {
-
-    }
+    public void save(Cursist cursist) {}
 
     @Override
     public void update(Cursist cursist, String[] params) {
