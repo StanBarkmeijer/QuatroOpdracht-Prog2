@@ -56,6 +56,7 @@ public class Cursist {
         this.lastName = rs.getString("LastName");
         this.birthDay = rs.getDate("BirthDay");
         this.password = rs.getString("Password");
+        this.gender = rs.getString("Gender");
         this.street = rs.getString("Street");
         this.number = rs.getInt("Number");
         this.postalCode = rs.getString("PostalCode");
@@ -109,5 +110,23 @@ public class Cursist {
 
     public String getCountry() {
         return country;
+    }
+
+    @Override
+    public String toString() {
+        return "Cursist{" +
+                "cursistId=" + cursistId +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDay=" + birthDay +
+                ", gender='" + gender + '\'' +
+                ", password='" + password + '\'' +
+                ", street='" + street + '\'' +
+                ", number=" + number +
+                ", postalCode='" + postalCode + '\'' +
+                ", residency='" + residency + '\'' +
+                ", country='" + country + '\'' +
+                '}';
     }
 }
