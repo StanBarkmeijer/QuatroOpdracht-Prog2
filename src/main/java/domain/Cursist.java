@@ -56,7 +56,7 @@ public class Cursist {
         this.lastName = rs.getString("LastName");
         this.birthDay = rs.getDate("BirthDay");
         this.password = rs.getString("Password");
-        this.gender = rs.getString("Gender");
+        this.gender = rs.getString("geslacht");
         this.street = rs.getString("Street");
         this.number = rs.getInt("Number");
         this.postalCode = rs.getString("PostalCode");

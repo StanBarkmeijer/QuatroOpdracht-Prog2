@@ -49,9 +49,7 @@ public class CursistDAO implements DAO<Cursist>{
         try {
             Connection connection = databaseConnect.getConnection();
 
-            final String query = "SELECT * FROM Cursist\n" +
-                    "INNER JOIN Address\n" +
-                    "ON Cursist.addressId = address.addressId";
+            final String query = "SELECT * FROM Cursist";
 
             ResultSet rs = connection.prepareStatement(query).executeQuery(query);
 
