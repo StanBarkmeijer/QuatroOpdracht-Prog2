@@ -1,6 +1,8 @@
 package controllers;
 
+import datastorage.CourseDAO;
 import datastorage.CursistDAO;
+import domain.Course;
 import domain.Cursist;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +31,7 @@ import java.util.prefs.Preferences;
 public class MainViewController {
 
     private CursistDAO cursistDAO;
+    private CourseDAO courseDAO;
 
     @FXML
     private Label firstName;
@@ -45,6 +48,7 @@ public class MainViewController {
 
     public MainViewController() {
         this.cursistDAO = new CursistDAO();
+        this.courseDAO = new CourseDAO();
     }
 
     @FXML
@@ -75,21 +79,21 @@ public class MainViewController {
     }
 
     public void handleCourseButton(MouseEvent mouseEvent) throws IOException {
-        List<Cursist> cursists = this.cursistDAO.getAll();
+        List<Course> courses = this.courseDAO.getAll();
 
         VBox contentBox = new VBox();
 
         URL url = getClass().getResource("../ui/CoursePreviewPane.fxml");
 
-        for (Cursist cursist : cursists) {
+        for (Course course : courses) {
             FXMLLoader loader = new FXMLLoader(url);
 
             CoursePreviewPaneController controller = new CoursePreviewPaneController(
                     scrollPane,
-                    cursist.getCursistId(),
-                    cursist.getFirstName(),
-                    cursist.getPostalCode(),
-                    cursist.getEmail()
+                    course.getCourseId(),
+                    course.getCourseTitle(),
+                    course.getCourseNiveau(),
+                    course.getCourseSubject()
             );
 
             loader.setController(controller);
