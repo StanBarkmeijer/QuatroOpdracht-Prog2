@@ -51,11 +51,6 @@ public class LoginController {
         Preferences preferences = Preferences.userRoot();
         preferences.put("user", user.getCursistId() + "");
 
-        ResponseHandler.handleError(Alert.AlertType.INFORMATION,
-                "Login message",
-                "Successfully logged in to " + user.getEmail() +
-                        "\nClick the button to continue to the next window");
-
         Stage stage =  (Stage) signUp.getScene().getWindow();
         URL url = getClass().getResource("../ui/MainView.fxml");
         Parent root = FXMLLoader.load(url);

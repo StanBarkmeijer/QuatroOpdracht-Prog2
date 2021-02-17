@@ -115,8 +115,43 @@ public class CursistDAO implements DAO<Cursist>{
     }
 
     @Override
-    public boolean update(Cursist cursist, String[] params) {
-        return true;
+    public boolean update(int id, Cursist cursist) {
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("UPDATE Cursist " +
+                    "SET EMail=?, " +
+                    "FirstName=?, " +
+                    "LastName=?, " +
+                    "BirthDay=?, " +
+                    "Geslacht=?, " +
+                    "Street=?, " +
+                    "Number=?, " +
+                    "PostalCode=?, " +
+                    "Residency=?, " +
+                    "Country=? " +
+                    "WHERE CursistId=?");
+
+            query.setString(1, cursist.getEmail());
+            query.setString(2, cursist.getFirstName());
+            query.setString(3, cursist.getLastName());
+            query.setDate(4, new java.sql.Date(cursist.getBirthDay().getTime()));
+            query.setString(5, cursist.getGender());
+            query.setString(6, cursist.getStreet());
+            query.setInt(7, cursist.getNumber());
+            query.setString(8, cursist.getPostalCode());
+            query.setString(9, cursist.getResidency());
+            query.setString(10, cursist.getCountry());
+            query.setInt(11, id);
+
+            query.execute();
+
+            return true;
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't update user", error.getMessage());
+            return false;
+        }
+
     }
 
     @Override

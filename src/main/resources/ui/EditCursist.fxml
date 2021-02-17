@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.EditCursistController"
+      prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="firstNameField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="First name" />
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="lastNameField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="Last name" />
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="emailField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="E-Mail" />
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <DatePicker fx:id="dateField" prefHeight="26.0" prefWidth="322.0" />
+                <Pane prefHeight="28.0" prefWidth="50.0" />
+                <Label text="Birthday" />
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="streetField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="Street" />
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="cityField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="City" />
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="countryField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="Country" />
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="homeNrField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="Home Nr" />
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="postalCodeField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="Postal Code" />
+            </children>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <TextField fx:id="genderField" prefHeight="26.0" prefWidth="323.0" />
+                <Pane prefHeight="200.0" prefWidth="50.0" />
+                <Label text="Gender" />
+            </children>
+        </HBox>
+        <Pane prefHeight="110.0" prefWidth="674.0" />
+        <HBox prefHeight="28.0" prefWidth="683.0">
+            <children>
+                <Button fx:id="saveAccountButton" onMouseClicked="#saveAccount" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: green;" text="Save Updates" textFill="WHITE" />
+                <Pane prefHeight="28.0" prefWidth="322.0" />
+                <Button fx:id="deleteAccountButton" onMouseClicked="#deleteAccount" mnemonicParsing="false" prefHeight="26.0" prefWidth="145.0" style="-fx-background-color: red;" text="Delete Account" textFill="WHITE" />
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets left="10.0" />
+    </padding>
+</VBox>

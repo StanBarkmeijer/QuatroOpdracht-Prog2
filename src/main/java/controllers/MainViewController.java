@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -39,6 +40,8 @@ public class MainViewController {
     private VBox contentBox;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private Label myAccountButton;
 
     public MainViewController() {
         this.cursistDAO = new CursistDAO();
@@ -111,5 +114,12 @@ public class MainViewController {
         }
 
         scrollPane.setContent(contentBox);
+    }
+
+    public void handleMyAccountButton(MouseEvent mouseEvent) throws IOException {
+        URL url = getClass().getResource("../ui/EditCursist.fxml");
+        Node node = FXMLLoader.load(url);
+
+        scrollPane.setContent(node);
     }
 }
