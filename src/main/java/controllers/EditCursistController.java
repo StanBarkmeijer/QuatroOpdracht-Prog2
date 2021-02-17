@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import utils.ResponseHandler;
 import utils.SignUpValidator;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -148,7 +149,7 @@ public class EditCursistController {
         }
     }
 
-    public void deleteAccount(MouseEvent mouseEvent) {
+    public void deleteAccount(MouseEvent mouseEvent) throws IOException {
         Optional<ButtonType> res = ResponseHandler.handleError(Alert.AlertType.CONFIRMATION,
                 "Warning!",
                 "Are you sure you want to delete this account?");
@@ -157,6 +158,14 @@ public class EditCursistController {
             int id = Preferences.userRoot().getInt("user", 0);
 
             cursistDAO.delete(cursistDAO.get(id));
+
+            Preferences.userRoot().remove("user");
+
+            Stage stage =  (Stage) deleteAccountButton.getScene().getWindow();
+            URL url = getClass().getResource("../ui/LoginView.fxml");
+            Parent root = FXMLLoader.load(url);
+
+            stage.setScene(new Scene(root));
         } else {
             ResponseHandler.handleError(Alert.AlertType.INFORMATION,
                     "Canceled",
