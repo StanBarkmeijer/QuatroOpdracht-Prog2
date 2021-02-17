@@ -74,43 +74,27 @@ public class MainViewController {
         stage.setScene(new Scene(root, 600, 600));
     }
 
-    public void handleCourseButton(MouseEvent mouseEvent) {
+    public void handleCourseButton(MouseEvent mouseEvent) throws IOException {
         List<Cursist> cursists = this.cursistDAO.getAll();
 
         VBox contentBox = new VBox();
 
+        URL url = getClass().getResource("../ui/CoursePreviewPane.fxml");
+
         for (Cursist cursist : cursists) {
-            Pane pane = new Pane();
-            pane.setId("cursistPane" + cursist.getCursistId());
-            pane.setPrefHeight(116.0);
-            pane.setPrefWidth(436.0);
+            FXMLLoader loader = new FXMLLoader(url);
 
-            Label name = new Label(cursist.getFirstName());
-            name.setId("courseName" + cursist.getCursistId());
-            name.setPrefHeight(34.0);
-            name.setPrefWidth(529.0);
-            name.setPadding(new Insets(0, 0, 0, 10));
-            name.setStyle("-fx-font-size: 14");
+            CoursePreviewPaneController controller = new CoursePreviewPaneController(
+                    cursist.getCursistId(),
+                    cursist.getFirstName(),
+                    cursist.getPostalCode(),
+                    cursist.getEmail()
+            );
 
-            Label content = new Label(cursist.getEmail());
-            content.setId("courseOnderwerp" + cursist.getCursistId());
-            content.setPrefHeight(75.0);
-            content.setPrefWidth(538.0);
-            content.setPadding(new Insets(0, 0, 0, 10));
-            content.setLayoutY(42.0);
-            content.setAlignment(Pos.TOP_LEFT);
+            loader.setController(controller);
+            Node node = loader.load();
 
-            Label niveau = new Label(cursist.getPostalCode());
-            niveau.setId("courseName" + cursist.getCursistId());
-            niveau.setPrefHeight(34.0);
-            niveau.setPrefWidth(529.0);
-            niveau.setPadding(new Insets(0, 0, 0, 10));
-            niveau.setLayoutX(532.0);
-
-            pane.getChildren().addAll(name, content, niveau);
-            pane.setStyle("-fx-border-color: #7c8184; -fx-border-width: 0 0 1 0");
-
-            contentBox.getChildren().add(pane);
+            contentBox.getChildren().add(node);
         }
 
         scrollPane.setContent(contentBox);

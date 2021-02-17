@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="119.0" prefWidth="682.0">
+    <children>
+        <Label fx:id="courseTitleId" prefHeight="34.0" prefWidth="203.0" text="Course title">
+            <padding>
+                <Insets left="20.0"/>
+            </padding>
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label fx:id="courseNiveauId" layoutX="582.0" prefHeight="34.0" prefWidth="100.0" text="Niveau">
+            <padding>
+                <Insets left="20.0"/>
+            </padding>
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label fx:id="courseDescriptionId" alignment="TOP_LEFT" layoutY="34.0" prefHeight="87.0" prefWidth="558.0"
+               text="Description">
+            <padding>
+                <Insets left="20.0"/>
+            </padding>
+        </Label>
+        <Button fx:id="visitCourseID" layoutX="582.0" layoutY="78.0" mnemonicParsing="false" onMouseClicked="#visitCourse"
+                style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #E76F51, #F69982);"
+                text="Visit course" textFill="WHITE"/>
+    </children>
+</Pane>
