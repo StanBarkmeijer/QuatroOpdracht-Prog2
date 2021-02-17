@@ -1,9 +1,17 @@
 package controllers;
 
+import datastorage.CursistDAO;
+import domain.Cursist;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class CoursePreviewPaneController {
 
@@ -16,12 +24,14 @@ public class CoursePreviewPaneController {
     @FXML
     private Button visitCourseId;
 
+    private ScrollPane scrollPane;
     private int courseId;
     private String courseTitle;
     private String courseNiveau;
     private String courseDescription;
 
-    public CoursePreviewPaneController(int id, String courseTitle, String courseNiveau, String courseDescription) {
+    public CoursePreviewPaneController(ScrollPane scrollPane, int id, String courseTitle, String courseNiveau, String courseDescription) {
+        this.scrollPane = scrollPane;
         this.courseId = id;
         this.courseTitle = courseTitle;
         this.courseNiveau = courseNiveau;
@@ -36,8 +46,25 @@ public class CoursePreviewPaneController {
     }
 
     @FXML
-    public void visitCourse(MouseEvent mouseEvent) {
-        System.out.println("Clicked course with ID: " + this.courseId);
+    public void visitCourse(MouseEvent mouseEvent) throws IOException {
+        URL url = getClass().getResource("../ui/CourseView.fxml");
+
+        Cursist cursist = new CursistDAO().get(courseId);
+
+        FXMLLoader loader = new FXMLLoader(url);
+
+        CourseViewController controller = new CourseViewController(
+                cursist.getCursistId(),
+                cursist.getFirstName(),
+                cursist.getPostalCode(),
+                cursist.getEmail(),
+                cursist.getResidency()
+        );
+
+        loader.setController(controller);
+        Node node = loader.load();
+
+        scrollPane.setContent(node);
     }
 
 }

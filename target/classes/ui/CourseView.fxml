@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="200.0" prefWidth="683.0">
+
+        <children>
+            <Pane prefHeight="202.0" prefWidth="683.0">
+                <children>
+                    <Label fx:id="courseTitle" layoutY="2.0" prefHeight="42.0" prefWidth="240.0" text="Course Title">
+                        <padding>
+                            <Insets left="20.0" />
+                        </padding>
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="courseSubject" layoutY="44.0" prefHeight="42.0" prefWidth="683.0" text="Course subject">
+                        <padding>
+                            <Insets left="20.0" />
+                        </padding>
+                    </Label>
+                    <Label fx:id="courseNiveau" layoutX="549.0" layoutY="6.0" prefHeight="34.0" prefWidth="133.0" text="Niveau" />
+                    <Label fx:id="courseIntroduction" alignment="TOP_LEFT" layoutY="100.0" prefHeight="116.0" prefWidth="683.0" text="Course introduction text">
+                        <padding>
+                            <Insets left="20.0" />
+                        </padding>
+                    </Label>
+                    <VBox prefHeight="200.0" prefWidth="100.0" />
+                </children>
+            </Pane>
+        </children>
+</VBox>
