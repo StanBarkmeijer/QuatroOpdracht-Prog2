@@ -75,6 +75,19 @@ public class CourseDAO implements DAO<Course> {
 
     @Override
     public boolean delete(Course course) {
-        return false;
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("DELETE FROM Cursist " +
+                    "WHERE CursistID=?");
+
+            query.setInt(1, course.getCourseId());
+
+            query.execute();
+
+            return true;
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't insert user", error.getMessage());
+            return false;
+        }
     }
 }
