@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<Pane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="135.0" prefWidth="638.0">
+        <children>
+            <Label fx:id="contentTitle" layoutY="2.0" prefHeight="42.0" prefWidth="240.0" text="Content title">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <Label fx:id="publicationDate" layoutX="549.0" layoutY="6.0" prefHeight="34.0" prefWidth="133.0" text="Publication " />
+            <Button fx:id="contentViewedButton" layoutX="549.0" layoutY="106.0" mnemonicParsing="false" style="-fx-background-color: green;" text="Content bekeken" textFill="WHITE" />
+            <Label fx:id="nameSpeaker" layoutY="40.0" prefHeight="34.0" prefWidth="133.0" text="Name speaker">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+            </Label>
+            <Label fx:id="nameOrganisation" layoutY="69.0" prefHeight="34.0" prefWidth="133.0" text="Organisation">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+            </Label>
+            <Label fx:id="url" layoutY="101.0" prefHeight="34.0" prefWidth="133.0" text="URL">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+            </Label>
+        </children>
+</Pane>

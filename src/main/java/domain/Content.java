@@ -17,7 +17,7 @@ public abstract class Content {
         this.cursusId = rs.getInt("cursusId");
         this.publication = rs.getDate("publication");
         this.status = rs.getString("status");
-        this.status = rs.getString("title");
+        this.title = rs.getString("title");
     }
 
     public int getContentId() {
