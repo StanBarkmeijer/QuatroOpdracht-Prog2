@@ -13,7 +13,7 @@ public class Webcast extends Content {
     private String organisation;
 
     public Webcast(ResultSet rs) throws SQLException {
-        super(rs);
+        super(rs, "Webcast");
 
         this.duration = rs.getInt("duration");
         this.url = rs.getString("url");
@@ -40,5 +40,16 @@ public class Webcast extends Content {
 
     public String getOrganisation() {
         return organisation;
+    }
+
+    @Override
+    public String toString() {
+        return "Webcast{" +
+                "duration=" + duration +
+                ", url='" + url + '\'' +
+                ", firstNameSpeaker='" + firstNameSpeaker + '\'' +
+                ", lastNameSpeaker='" + lastNameSpeaker + '\'' +
+                ", organisation='" + organisation + '\'' +
+                '}';
     }
 }

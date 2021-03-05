@@ -12,7 +12,7 @@ public class Module extends Content {
     private String lastNameContact;
 
     public Module(ResultSet rs) throws SQLException {
-        super(rs);
+        super(rs, "Module");
 
         this.version = rs.getString("version");
         this.description = rs.getString("description");
@@ -34,5 +34,15 @@ public class Module extends Content {
 
     public String getLastNameContact() {
         return lastNameContact;
+    }
+
+    @Override
+    public String toString() {
+        return "Module{" +
+                "version='" + version + '\'' +
+                ", description='" + description + '\'' +
+                ", firstNameContact='" + firstNameContact + '\'' +
+                ", lastNameContact='" + lastNameContact + '\'' +
+                '}';
     }
 }

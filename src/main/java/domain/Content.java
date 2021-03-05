@@ -11,13 +11,16 @@ public abstract class Content {
     private Date publication;
     private String status;
     private String title;
+    private String type;
 
-    public Content(ResultSet rs) throws SQLException {
+    public Content(ResultSet rs, String type) throws SQLException {
         this.contentId = rs.getInt("contentId");
         this.cursusId = rs.getInt("cursusId");
         this.publication = rs.getDate("publication");
         this.status = rs.getString("status");
         this.title = rs.getString("title");
+
+        this.type = type;
     }
 
     public int getContentId() {
@@ -38,5 +41,9 @@ public abstract class Content {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getType() {
+        return type;
     }
 }

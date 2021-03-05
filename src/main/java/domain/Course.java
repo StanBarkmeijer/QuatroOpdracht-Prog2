@@ -1,7 +1,10 @@
 package domain;
 
+import datastorage.ContentDAO;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Course {
 
@@ -10,6 +13,7 @@ public class Course {
     private String courseSubject;
     private String courseIntroduction;
     private String courseNiveau;
+    private List<Content> contentList;
 
     public Course(int courseId, String courseTitle, String courseSubject, String courseIntroduction, String courseNiveau) {
         this.courseId = courseId;
@@ -20,11 +24,15 @@ public class Course {
     }
 
     public Course(ResultSet rs) throws SQLException {
+        ContentDAO contentDAO = new ContentDAO();
+
         this.courseId = rs.getInt("cursusId");
         this.courseTitle = rs.getString("cursusNaam");
         this.courseSubject = rs.getString("subject");
         this.courseIntroduction = rs.getString("introductionText");
         this.courseNiveau = rs.getString("niveau");
+
+        this.contentList = contentDAO.getAllFromCourseId(courseId);
     }
 
     public int getCourseId() {
@@ -45,5 +53,9 @@ public class Course {
 
     public String getCourseNiveau() {
         return courseNiveau;
+    }
+
+    public List<Content> getContentList() {
+        return contentList;
     }
 }

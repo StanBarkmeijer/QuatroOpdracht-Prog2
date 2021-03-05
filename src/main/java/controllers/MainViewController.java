@@ -89,11 +89,7 @@ public class MainViewController {
             FXMLLoader loader = new FXMLLoader(url);
 
             CoursePreviewPaneController controller = new CoursePreviewPaneController(
-                    scrollPane,
-                    course.getCourseId(),
-                    course.getCourseTitle(),
-                    course.getCourseNiveau(),
-                    course.getCourseSubject()
+                    scrollPane, course
             );
 
             loader.setController(controller);

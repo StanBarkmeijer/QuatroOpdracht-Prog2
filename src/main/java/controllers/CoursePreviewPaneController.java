@@ -2,6 +2,7 @@ package controllers;
 
 import datastorage.CourseDAO;
 import datastorage.CursistDAO;
+import domain.Content;
 import domain.Course;
 import domain.Cursist;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 
 public class CoursePreviewPaneController {
 
@@ -27,41 +29,27 @@ public class CoursePreviewPaneController {
     private Button visitCourseId;
 
     private ScrollPane scrollPane;
-    private int courseId;
-    private String courseTitle;
-    private String courseNiveau;
-    private String courseDescription;
+    private Course course;
 
-    public CoursePreviewPaneController(ScrollPane scrollPane, int id, String courseTitle, String courseNiveau, String courseDescription) {
+    public CoursePreviewPaneController(ScrollPane scrollPane, Course course) {
         this.scrollPane = scrollPane;
-        this.courseId = id;
-        this.courseTitle = courseTitle;
-        this.courseNiveau = courseNiveau;
-        this.courseDescription = courseDescription;
+        this.course = course;
     }
 
     @FXML
     public void initialize() {
-        this.courseTitleId.setText(courseTitle);
-        this.courseNiveauId.setText(courseNiveau);
-        this.courseDescriptionId.setText(courseDescription);
+        this.courseTitleId.setText(course.getCourseTitle());
+        this.courseNiveauId.setText(course.getCourseNiveau());
+        this.courseDescriptionId.setText(course.getCourseIntroduction());
     }
 
     @FXML
     public void visitCourse(MouseEvent mouseEvent) throws IOException {
         URL url = getClass().getResource("../ui/CourseView.fxml");
 
-        Course course = new CourseDAO().get(courseId);
-
         FXMLLoader loader = new FXMLLoader(url);
 
-        CourseViewController controller = new CourseViewController(
-                course.getCourseId(),
-                course.getCourseTitle(),
-                course.getCourseNiveau(),
-                course.getCourseSubject(),
-                course.getCourseIntroduction()
-        );
+        CourseViewController controller = new CourseViewController(course);
 
         loader.setController(controller);
         Node node = loader.load();
