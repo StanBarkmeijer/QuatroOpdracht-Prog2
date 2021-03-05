@@ -2,8 +2,16 @@ package controllers;
 
 import domain.Module;
 import domain.Webcast;
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import utils.ResponseHandler;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class WebcastPaneController {
@@ -17,7 +25,7 @@ public class WebcastPaneController {
     @FXML
     private Label nameOrganisation;
     @FXML
-    private Label url;
+    private Hyperlink url;
 
     private Webcast webcast;
 
@@ -26,12 +34,23 @@ public class WebcastPaneController {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize()  {
         this.contentTitle.setText(webcast.getTitle());
         this.publicationDate.setText(webcast.getPublication().toString());
         this.nameSpeaker.setText(webcast.getFirstNameSpeaker() + " " + webcast.getLastNameSpeaker());
         this.nameOrganisation.setText(webcast.getOrganisation());
-        this.url.setText(webcast.getUrl());
+
+        url.setText(webcast.getUrl());
+
+        url.setOnAction(e -> {
+            try {
+                java.awt.Desktop.getDesktop().browse(new URI(webcast.getUrl()));
+            } catch (Exception err) {
+                ResponseHandler.handleError(Alert.AlertType.ERROR,
+                        "Couldn't open the link",
+                        "We're sorry. Please try it again later.");
+            }
+        });
     }
 
 }
