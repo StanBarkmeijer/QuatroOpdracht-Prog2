@@ -103,6 +103,22 @@ public class SignUpController {
             return;
         }
 
+        try {
+            if (Double.isNaN(Double.parseDouble(homeNumber))) {
+                ResponseHandler.handleError(Alert.AlertType.ERROR,
+                        "Couldn't create account",
+                        "The home number is not an actual number");
+
+                return;
+            }
+        } catch (Exception e) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR,
+                    "Couldn't create account",
+                    "The home number is not an actual number");
+
+            return;
+        }
+
         Cursist toInsert = new Cursist(email, firstName, lastName,
                 birthDay, gender, password, street, parseInt(homeNumber), postalCode, city, country);
 
