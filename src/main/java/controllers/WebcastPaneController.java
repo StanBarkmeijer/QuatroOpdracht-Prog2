@@ -5,6 +5,7 @@ import domain.Webcast;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import utils.ResponseHandler;
@@ -26,6 +27,8 @@ public class WebcastPaneController {
     private Label nameOrganisation;
     @FXML
     private Hyperlink url;
+    @FXML
+    private Button contentViewedButton;
 
     private Webcast webcast;
 

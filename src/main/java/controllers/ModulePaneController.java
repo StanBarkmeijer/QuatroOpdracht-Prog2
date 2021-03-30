@@ -2,6 +2,7 @@ package controllers;
 
 import domain.Module;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 
@@ -17,6 +18,8 @@ public class ModulePaneController {
     private Label description;
     @FXML
     private Label version;
+    @FXML
+    private Button contentViewedButton;
 
     private Module module;
 
@@ -31,6 +34,10 @@ public class ModulePaneController {
         this.nameContact.setText(module.getFirstNameContact() + " " + module.getLastNameContact());
         this.description.setText(module.getDescription());
         this.version.setText(module.getVersion());
+
+        contentViewedButton.setOnAction(x -> {
+
+        });
     }
 
 }

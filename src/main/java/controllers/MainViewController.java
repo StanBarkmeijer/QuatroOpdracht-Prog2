@@ -40,6 +40,8 @@ public class MainViewController {
     @FXML
     private Label coursesButton;
     @FXML
+    private Label followedCoursesButton;
+    @FXML
     private VBox contentBox;
     @FXML
     private ScrollPane scrollPane;
@@ -103,6 +105,13 @@ public class MainViewController {
 
     public void handleMyAccountButton(MouseEvent mouseEvent) throws IOException {
         URL url = getClass().getResource("../ui/EditCursist.fxml");
+        Node node = FXMLLoader.load(url);
+
+        scrollPane.setContent(node);
+    }
+
+    public void handleFollowedCoursesButton(MouseEvent mouseEvent) throws IOException {
+        URL url = getClass().getResource("../ui/FollowedCourses.fxml");
         Node node = FXMLLoader.load(url);
 
         scrollPane.setContent(node);
