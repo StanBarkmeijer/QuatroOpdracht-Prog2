@@ -3,25 +3,40 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="102.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label fx:id="contentTitle" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="240.0" text="Content title">
-         <padding>
-            <Insets left="20.0" />
-         </padding>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="publicationDate" layoutX="536.0" layoutY="18.0" prefHeight="34.0" prefWidth="133.0" text="Publication " />
-      <Label fx:id="type" layoutX="14.0" layoutY="52.0" prefHeight="34.0" prefWidth="133.0" text="Type">
-         <padding>
-            <Insets left="20.0" />
-         </padding>
-      </Label>
-      <Button fx:id="unfollowContentButton" layoutX="495.0" layoutY="57.0" mnemonicParsing="false" style="-fx-background-color: red;" text="Unfollow content" textFill="WHITE" />
-   </children>
+<Pane prefHeight="204.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      <VBox prefHeight="202.0" prefWidth="754.0">
+         <children>
+
+            <Pane fx:id="box" prefHeight="202.0" prefWidth="730.0">
+               <children>
+                  <Label fx:id="courseTitle" layoutY="2.0" prefHeight="42.0" prefWidth="240.0" text="Course Title">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="courseSubject" layoutY="44.0" prefHeight="42.0" prefWidth="599.0" text="Course subject">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="courseNiveau" layoutX="494.0" layoutY="6.0" prefHeight="34.0" prefWidth="133.0" text="Niveau" />
+                  <Label fx:id="courseIntroduction" alignment="TOP_LEFT" layoutY="100.0" prefHeight="116.0" prefWidth="475.0" text="Course introduction text">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="unfollowCourseButton" layoutX="494.0" layoutY="146.0" mnemonicParsing="false" style="-fx-background-color: red;" text="Ontvolg cursus" textFill="WHITE" />
+               </children>
+            </Pane>
+            <VBox fx:id="vBox" />
+         </children>
+      </VBox>
 </Pane>

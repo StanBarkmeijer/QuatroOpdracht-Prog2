@@ -168,7 +168,7 @@ public class CursistDAO implements DAO<Cursist>{
 
             return true;
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't insert user", error.getMessage());
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't delete user", error.getMessage());
             return false;
         }
     }

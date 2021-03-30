@@ -21,10 +21,10 @@ public class FollowedCursus {
 
     public FollowedCursus(ResultSet rs) throws SQLException {
         this.followedCursusId = rs.getInt("FollowedCursusId");
-        this.cursistId = rs.getInt("FollowedCursusId");
-        this.cursusId = rs.getInt("FollowedCursusId");
-        this.identifier = rs.getString("FollowedCursusId");
-        this.registrationDate = rs.getDate("FollowedCursusId");
+        this.cursistId = rs.getInt("CursistId");
+        this.cursusId = rs.getInt("CursusId");
+        this.identifier = rs.getString("Identifier");
+        this.registrationDate = rs.getDate("RegistrationDate");
     }
 
     public int getFollowedCursusId() {

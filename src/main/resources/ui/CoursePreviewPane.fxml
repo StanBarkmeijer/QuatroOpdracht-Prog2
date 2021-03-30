@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <Pane xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      prefHeight="526.0" prefWidth="682.0">
+      prefHeight="526.0">
     <children>
         <Label fx:id="courseTitleId" prefHeight="34.0" prefWidth="203.0" text="Course title">
             <padding>

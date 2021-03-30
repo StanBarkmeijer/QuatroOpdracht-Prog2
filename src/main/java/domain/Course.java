@@ -58,4 +58,16 @@ public class Course {
     public List<Content> getContentList() {
         return contentList;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId=" + courseId +
+                ", courseTitle='" + courseTitle + '\'' +
+                ", courseSubject='" + courseSubject + '\'' +
+                ", courseIntroduction='" + courseIntroduction + '\'' +
+                ", courseNiveau='" + courseNiveau + '\'' +
+                ", contentList=" + contentList +
+                '}';
+    }
 }

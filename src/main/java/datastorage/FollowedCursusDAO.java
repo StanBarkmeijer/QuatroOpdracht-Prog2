@@ -63,33 +63,34 @@ public class FollowedCursusDAO implements DAO<FollowedCursus> {
         return followedCursus;
     }
 
-    public FollowedCursus getFromUserID(int id) {
+    public ArrayList<FollowedCursus> getFromUserID(int id) {
+        ArrayList<FollowedCursus> list = new ArrayList<>();
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+
+            final String query = "SELECT * FROM FollowedCursus";
+
+            ResultSet rs = connection.prepareStatement(query).executeQuery(query);
+
+            while (rs.next()) {
+                list.add(new FollowedCursus(rs));
+            }
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all followed courses", error.getMessage());
+        }
+
+        return list;
+    }
+
+    public FollowedCursus followedFoundWithCursistIDAndCursusID(int cursistId, int cursusId) {
         FollowedCursus followedCursus = null;
 
         try {
             Connection connection = databaseConnect.getConnection();
-            PreparedStatement query = connection.prepareStatement("SELECT * FROM FollowedCursus WHERE CursistId=?");
-
-            query.setInt(1, id);
-
-            ResultSet rs = query.executeQuery();
-
-            rs.next();
-
-            followedCursus = new FollowedCursus(rs);
-        } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get user with ID: " + id, error.getMessage());
-        }
-
-        return followedCursus;
-    }
-
-    public boolean followedFoundWithCursistIDAndCursusID(int cursistId, int cursusId) {
-        boolean followedCursus = false;
-
-        try {
-            Connection connection = databaseConnect.getConnection();
-            PreparedStatement query = connection.prepareStatement("SELECT * FROM FollowedCursus WHERE CursistId=? AND CursusID=?");
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM FollowedCursus " +
+                    "WHERE CursistId=? " +
+                    "AND CursusID=?");
 
             query.setInt(1, cursistId);
             query.setInt(2, cursusId);
@@ -98,9 +99,9 @@ public class FollowedCursusDAO implements DAO<FollowedCursus> {
 
             rs.next();
 
-            followedCursus = true;
+            followedCursus = new FollowedCursus(rs);
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get user with ID: " + cursistId + " and " + cursusId, error.getMessage());
+            return null;
         }
 
         return followedCursus;
@@ -135,6 +136,21 @@ public class FollowedCursusDAO implements DAO<FollowedCursus> {
 
     @Override
     public boolean delete(FollowedCursus followedCursus) {
-        return false;
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("DELETE FROM FollowedCursus " +
+                    "WHERE CursistID=? " +
+                    "AND CursusID=?");
+
+            query.setInt(1, followedCursus.getCursistId());
+            query.setInt(2, followedCursus.getCursusId());
+
+            query.execute();
+
+            return true;
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't unfollow the course", error.getMessage());
+            return false;
+        }
     }
 }

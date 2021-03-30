@@ -52,15 +52,13 @@ public class CourseViewController {
 
             int cursistId = Preferences.userRoot().getInt("user", 0);
 
-            if (followedCursusDAO.followedFoundWithCursistIDAndCursusID(cursistId, course.getCourseId())) {
+            if (followedCursusDAO.followedFoundWithCursistIDAndCursusID(cursistId, course.getCourseId()) != null) {
                 ResponseHandler.handleError(Alert.AlertType.WARNING,
                         "Content already followed",
                         "You already followed the lesson: " + course.getCourseTitle() + ", woops!");
 
                 return;
             }
-
-            System.out.println(cursistId);
 
             FollowedCursus toInsert = new FollowedCursus(cursistId, course.getCourseId(), "identifier", new Date());
 
