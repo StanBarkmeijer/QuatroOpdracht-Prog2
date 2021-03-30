@@ -84,9 +84,48 @@ public class FollowedCursusDAO implements DAO<FollowedCursus> {
         return followedCursus;
     }
 
+    public boolean followedFoundWithCursistIDAndCursusID(int cursistId, int cursusId) {
+        boolean followedCursus = false;
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM FollowedCursus WHERE CursistId=? AND CursusID=?");
+
+            query.setInt(1, cursistId);
+            query.setInt(2, cursusId);
+
+            ResultSet rs = query.executeQuery();
+
+            rs.next();
+
+            followedCursus = true;
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get user with ID: " + cursistId + " and " + cursusId, error.getMessage());
+        }
+
+        return followedCursus;
+    }
+
     @Override
     public boolean save(FollowedCursus followedCursus) {
-        return false;
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("INSERT INTO FollowedCursus " +
+                    "(CursistID, CursusID, Identifier, RegistrationDate)" +
+                    "VALUES (?, ?, ?, ?)");
+
+            query.setInt(1, followedCursus.getCursistId());
+            query.setInt(2, followedCursus.getCursusId());
+            query.setString(3, followedCursus.getIdentifier());
+            query.setDate(4, new java.sql.Date(followedCursus.getRegistrationDate().getTime()));
+
+            query.execute();
+
+            return true;
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't insert followed cursus", error.getMessage());
+            return false;
+        }
     }
 
     @Override

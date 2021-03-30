@@ -1,9 +1,16 @@
 package controllers;
 
+import datastorage.FollowedCursusDAO;
+import domain.FollowedCursus;
 import domain.Module;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import utils.ResponseHandler;
+
+import java.util.Date;
+import java.util.prefs.Preferences;
 
 
 public class ModulePaneController {
@@ -34,10 +41,6 @@ public class ModulePaneController {
         this.nameContact.setText(module.getFirstNameContact() + " " + module.getLastNameContact());
         this.description.setText(module.getDescription());
         this.version.setText(module.getVersion());
-
-        contentViewedButton.setOnAction(x -> {
-
-        });
     }
 
 }

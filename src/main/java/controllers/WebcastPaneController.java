@@ -1,5 +1,7 @@
 package controllers;
 
+import datastorage.FollowedCursusDAO;
+import domain.FollowedCursus;
 import domain.Module;
 import domain.Webcast;
 import javafx.application.HostServices;
@@ -13,6 +15,8 @@ import utils.ResponseHandler;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
+import java.util.prefs.Preferences;
 
 
 public class WebcastPaneController {
@@ -27,8 +31,6 @@ public class WebcastPaneController {
     private Label nameOrganisation;
     @FXML
     private Hyperlink url;
-    @FXML
-    private Button contentViewedButton;
 
     private Webcast webcast;
 

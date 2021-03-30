@@ -12,8 +12,7 @@ public class FollowedCursus {
     private String identifier;
     private Date registrationDate;
 
-    public FollowedCursus(int followedCursusId, int cursistId, int cursusId, String identifier, Date registrationDate) {
-        this.followedCursusId = followedCursusId;
+    public FollowedCursus(int cursistId, int cursusId, String identifier, Date registrationDate) {
         this.cursistId = cursistId;
         this.cursusId = cursusId;
         this.identifier = identifier;

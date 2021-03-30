@@ -66,7 +66,7 @@
                            </VBox.margin>
                         </Label>
 
-                        <Label fx:id="followedCoursesButton" onMouseClicked="#handleMyAccountButton" prefHeight="41.0" prefWidth="210.0" text="Followed courses" textFill="WHITE">
+                        <Label fx:id="followedCoursesButton" onMouseClicked="#handleFollowedCoursesButton" prefHeight="41.0" prefWidth="210.0" text="Followed courses" textFill="WHITE">
                            <VBox.margin>
                               <Insets left="20.0" />
                            </VBox.margin>
