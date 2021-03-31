@@ -47,13 +47,12 @@ public class CourseDAO implements DAO<Course> {
         try {
             Connection connection = databaseConnect.getConnection();
 
-            final String query = "SELECT * FROM Cursus WHERE CursusNaam LIKE ?";
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM Cursus " +
+                    "WHERE CursusNaam LIKE ?");
 
-            PreparedStatement stmt = connection.prepareStatement(query);
+            query.setString(1, "%" + name + "%");
 
-            stmt.setString(1, "%" + name + "%");
-
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
                 list.add(new Course(rs));

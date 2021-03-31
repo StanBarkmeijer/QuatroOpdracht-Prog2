@@ -11,13 +11,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import utils.ResponseHandler;
@@ -83,7 +82,58 @@ public class MainViewController {
     public void handleCourseButton(MouseEvent mouseEvent) throws IOException {
         List<Course> courses = this.courseDAO.getAll();
 
+        HBox searchPart = new HBox();
+
+        TextField searchBar = new TextField();
+        searchBar.setId("searchBar");
+        searchBar.setPrefWidth(300);
+
+        Button button = new Button();
+        button.setId("searchButton");
+        button.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #E76F51, #F69982);");
+        button.setText("Search");
+        button.setTextFill(Color.WHITE);
+
+        searchPart.getChildren().addAll(searchBar, button);
+
+        button.setOnAction(x -> {
+            VBox contentBox = new VBox();
+            HBox box = new HBox();
+
+            box.getChildren().addAll(searchBar, searchPart);
+            contentBox.getChildren().add(box);
+
+            String input = searchBar.getText();
+
+            List<Course> foundCourses = this.courseDAO.findByName(input);
+
+            URL url = getClass().getResource("../ui/CoursePreviewPane.fxml");
+
+            for (Course course : foundCourses) {
+                FXMLLoader loader = new FXMLLoader(url);
+
+                CoursePreviewPaneController controller = new CoursePreviewPaneController(
+                        scrollPane, course
+                );
+
+                loader.setController(controller);
+                Node node = null;
+
+                try {
+                    node = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                contentBox.getChildren().add(node);
+            }
+
+            scrollPane.setContent(contentBox);
+        });
+
         VBox contentBox = new VBox();
+
+        contentBox.getChildren().add(searchPart);
 
         URL url = getClass().getResource("../ui/CoursePreviewPane.fxml");
 
