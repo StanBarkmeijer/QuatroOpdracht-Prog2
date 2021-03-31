@@ -132,6 +132,10 @@ public class SignUpController {
             Parent root = FXMLLoader.load(url);
 
             stage.setScene(new Scene(root, 600, 600));
+        } else {
+            ResponseHandler.handleError(Alert.AlertType.ERROR,
+                    "Something went wrong",
+                    "Please contact one of the developers");
         }
     }
 

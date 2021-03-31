@@ -3,6 +3,7 @@ package datastorage;
 import domain.Cursist;
 import javafx.scene.control.Alert;
 import utils.ResponseHandler;
+import utils.SignUpValidator;
 
 import javax.lang.model.type.ErrorType;
 import java.sql.*;
@@ -93,6 +94,14 @@ public class CursistDAO implements DAO<Cursist>{
                     "(Email, FirstName, LastName, BirthDay, Geslacht, Password, Street, Number, PostalCode, Residency, Country)" +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
+            List<String> validator = new SignUpValidator(cursist.getFirstName(), cursist.getLastName(), cursist.getEmail(),
+                    cursist.getStreet(), cursist.getResidency(), cursist.getStreet(),
+                    "" + cursist.getNumber(), cursist.getPostalCode(),
+                    cursist.getGender(), cursist.getPassword(), cursist.getPassword())
+                        .validate();
+
+            if (validator.size() > 0) return false;
+
             query.setString(1, cursist.getEmail());
             query.setString(2, cursist.getFirstName());
             query.setString(3, cursist.getLastName());
@@ -109,7 +118,6 @@ public class CursistDAO implements DAO<Cursist>{
 
             return true;
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't insert user", error.getMessage());
             return false;
         }
     }
@@ -163,6 +171,24 @@ public class CursistDAO implements DAO<Cursist>{
                     "WHERE CursistID=?");
 
             query.setInt(1, cursist.getCursistId());
+
+            query.execute();
+
+            return true;
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't delete user", error.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deleteByEmail(String email) {
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("DELETE FROM Cursist " +
+                    "WHERE email=?");
+
+            query.setString(1, email);
 
             query.execute();
 
