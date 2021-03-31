@@ -1,9 +1,8 @@
 import datastorage.CursistDAO;
 import domain.Cursist;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
+import java.util.Date;
 
 public class LoginTest {
 
@@ -13,17 +12,28 @@ public class LoginTest {
         this.cursistDAO = new CursistDAO();
     }
 
+    @BeforeAll
+    static void createTestAccount() {
+        CursistDAO cursistDAO = new CursistDAO();
+
+        Cursist cursist = new Cursist("testaccount@test.com", "Test", "Test",
+                new Date(), "Test", "test", "Test",
+                19, "2951DC", "Test", "Test");
+
+        cursistDAO.save(cursist);
+    }
+
     @Nested
     @DisplayName("Should allow")
     class ShouldAllow {
         @Test
         @DisplayName("Should succesfully login")
         public void shouldLoginWithCredentialsTestAtTestComAndTest() {
-            Cursist cursist = cursistDAO.login("test@test.com", "test");
+            Cursist cursist = cursistDAO.login("testaccount@test.com", "test");
 
             String name = cursist.getFirstName();
 
-            Assertions.assertEquals("Stan", name);
+            Assertions.assertEquals("Test", name);
         }
     }
 
@@ -47,6 +57,13 @@ public class LoginTest {
             Assertions.assertNull(cursist);
             Assertions.assertNull(cursist2);
         }
+    }
+
+    @AfterAll
+    static void deleteTestAccount() {
+        CursistDAO cursistDAO = new CursistDAO();
+
+        cursistDAO.deleteByEmail("testaccount@test.com");
     }
 
 }
