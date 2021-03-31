@@ -41,6 +41,32 @@ public class CourseDAO implements DAO<Course> {
         return list;
     }
 
+    public List<Course> findByName(String name) {
+        ArrayList<Course> list = new ArrayList<>();
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+
+            final String query = "SELECT * FROM Cursus WHERE CursusNaam LIKE ?";
+
+            PreparedStatement stmt = connection.prepareStatement(query);
+
+            stmt.setString(1, "%" + name + "%");
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                list.add(new Course(rs));
+            }
+        } catch (SQLException error) {
+            ResponseHandler.handleError(Alert.AlertType.ERROR,
+                    "Couldn't find courses with name: " + name,
+                    error.getMessage());
+        }
+
+        return list;
+    }
+
     @Override
     public Course get(int id) {
         Course course = null;
