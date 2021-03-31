@@ -71,6 +71,34 @@ public class UpdateTest {
             Assertions.assertFalse(res);
         }
 
+        @Test
+        @DisplayName("Should return false with wrong email format")
+        public void shouldReturnFalseWithWrongEmailFormat() {
+            Cursist cursist = cursistDAO.getByEmail("testaccount@test.com");
+            int id = cursist.getCursistId();
+            Cursist newCursist = new Cursist("wasd", "Test", "Test",
+                    new Date(), "Test", "test", "Test",
+                    19, "2951DC", "Test", "Test");
+
+            boolean res = cursistDAO.update(id, newCursist);
+
+            Assertions.assertFalse(res);
+        }
+
+        @Test
+        @DisplayName("Should return false with wrong postal code format")
+        public void shouldReturnFalseWithWrongPostalCodeFormat() {
+            Cursist cursist = cursistDAO.getByEmail("testaccount@test.com");
+            int id = cursist.getCursistId();
+            Cursist newCursist = new Cursist("testaccount@test.com", "Test", "Test",
+                    new Date(), "Test", "test", "Test",
+                    19, "wasd", "Test", "Test");
+
+            boolean res = cursistDAO.update(id, newCursist);
+
+            Assertions.assertFalse(res);
+        }
+
     }
 
     @AfterAll
