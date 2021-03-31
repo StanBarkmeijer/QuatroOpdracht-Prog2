@@ -36,7 +36,7 @@ public class CursistDAO implements DAO<Cursist>{
 
             connection.close();
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't login", error.getMessage());
+            return cursist;
         }
 
         return cursist;
