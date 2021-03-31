@@ -86,6 +86,27 @@ public class CursistDAO implements DAO<Cursist>{
         return cursist;
     }
 
+    public Cursist getByEmail(String email) {
+        Cursist cursist = null;
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM Cursist WHERE EMail=?");
+
+            query.setString(1, email);
+
+            ResultSet rs = query.executeQuery();
+
+            rs.next();
+
+            cursist = new Cursist(rs);
+        } catch (SQLException error) {
+            return null;
+        }
+
+        return cursist;
+    }
+
     @Override
     public boolean save(Cursist cursist) {
         try {
@@ -182,6 +203,11 @@ public class CursistDAO implements DAO<Cursist>{
     }
 
     public boolean deleteByEmail(String email) {
+        Cursist cursist = getByEmail(email);
+
+        if (cursist == null) {
+            return false;
+        }
 
         try {
             Connection connection = databaseConnect.getConnection();
@@ -194,7 +220,6 @@ public class CursistDAO implements DAO<Cursist>{
 
             return true;
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't delete user", error.getMessage());
             return false;
         }
     }

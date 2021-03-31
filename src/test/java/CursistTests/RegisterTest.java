@@ -1,3 +1,5 @@
+package CursistTests;
+
 import datastorage.CursistDAO;
 import domain.Cursist;
 import org.junit.jupiter.api.*;
