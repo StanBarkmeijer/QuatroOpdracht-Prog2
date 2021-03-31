@@ -4,6 +4,7 @@ import domain.Cursist;
 import javafx.scene.control.Alert;
 import utils.ResponseHandler;
 import utils.SignUpValidator;
+import utils.UpdateCursistHandler;
 
 import javax.lang.model.type.ErrorType;
 import java.sql.*;
@@ -161,6 +162,14 @@ public class CursistDAO implements DAO<Cursist>{
                     "Country=? " +
                     "WHERE CursistId=?");
 
+
+            List<String> validator = new UpdateCursistHandler(cursist.getFirstName(), cursist.getLastName(), cursist.getEmail(),
+                    cursist.getStreet(), cursist.getResidency(), cursist.getStreet(),
+                    "" + cursist.getNumber(), cursist.getPostalCode(), cursist.getGender())
+                    .validate();
+
+            if (validator.size() > 0) return false;
+
             query.setString(1, cursist.getEmail());
             query.setString(2, cursist.getFirstName());
             query.setString(3, cursist.getLastName());
@@ -177,7 +186,6 @@ public class CursistDAO implements DAO<Cursist>{
 
             return true;
         } catch (SQLException error) {
-            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't update user", error.getMessage());
             return false;
         }
 

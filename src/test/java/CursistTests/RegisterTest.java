@@ -55,7 +55,7 @@ public class RegisterTest {
     }
 
     @AfterAll
-    static void deleteTestAccout() {
+    static void deleteTestAccount() {
         new CursistDAO().deleteByEmail("testaccount@test.com");
     }
 
