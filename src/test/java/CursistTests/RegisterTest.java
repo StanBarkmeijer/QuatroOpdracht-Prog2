@@ -52,6 +52,30 @@ public class RegisterTest {
             Assertions.assertFalse(res);
         }
 
+        @Test
+        @DisplayName("Should return false with wrong email format ")
+        public void shouldReturnFalseWithWrongEmailFormat() {
+            Cursist cursist = new Cursist("wasd", "Stan", "Barkmeijer",
+                    new Date(), "Man", "test", "Heinemanpad",
+                    19, "2951DC", "Alblasserdam", "Netherlands");
+
+            boolean res = cursistDAO.save(cursist);
+
+            Assertions.assertFalse(res);
+        }
+
+        @Test
+        @DisplayName("Should return false with wrong postal code format")
+        public void shouldReturnFalseWithWrongPostalCodeFormat() {
+            Cursist cursist = new Cursist("testaccount@test.com", "Stan", "Barkmeijer",
+                    new Date(), "Man", "test", "Heinemanpad",
+                    19, "wasd", "Alblasserdam", "Netherlands");
+
+            boolean res = cursistDAO.save(cursist);
+
+            Assertions.assertFalse(res);
+        }
+
     }
 
     @AfterAll
