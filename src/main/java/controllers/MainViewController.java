@@ -162,7 +162,12 @@ public class MainViewController {
 
     public void handleFollowedCoursesButton(MouseEvent mouseEvent) throws IOException {
         URL url = getClass().getResource("../ui/FollowedCoursesView.fxml");
-        Node node = FXMLLoader.load(url);
+        FXMLLoader loader = new FXMLLoader(url);
+
+        FollowedCoursesViewController controller = new FollowedCoursesViewController(scrollPane);
+
+        loader.setController(controller);
+        Node node = loader.load();
 
         scrollPane.setContent(node);
     }

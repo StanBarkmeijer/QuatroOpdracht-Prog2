@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 
 <ScrollPane xmlns="http://javafx.com/javafx/15.0.1"
-            fx:controller="controllers.FollowedCoursesViewController"
             xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <VBox fx:id="mainContent">

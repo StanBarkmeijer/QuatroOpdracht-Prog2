@@ -1,5 +1,6 @@
 package controllers;
 
+import datastorage.CourseDAO;
 import datastorage.FollowedCursusDAO;
 import domain.Content;
 import domain.Course;
@@ -10,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import utils.ResponseHandler;
 
@@ -22,6 +24,12 @@ public class FollowedCoursesViewController {
 
     @FXML
     private VBox vBox;
+    @FXML
+    private ScrollPane scrollPane;
+
+    public FollowedCoursesViewController(ScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
 
     @FXML
     public void initialize() throws IOException {
@@ -45,6 +53,27 @@ public class FollowedCoursesViewController {
 
             loader.setController(controller);
             Node node = loader.load();
+
+            node.setOnMouseClicked(event -> {
+                URL course_url = getClass().getResource("../ui/CourseView.fxml");
+
+                FXMLLoader course_loader = new FXMLLoader(course_url);
+
+                CourseDAO courseDAO = new CourseDAO();
+                Course searchObject = courseDAO.get(cursus.getCursusId());
+                CourseViewController course_controller = new CourseViewController(searchObject);
+
+                course_loader.setController(course_controller);
+
+                try {
+                    Node course_node = course_loader.load();
+
+                    scrollPane.setContent(course_node);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
 
             vBox.getChildren().add(node);
         }
