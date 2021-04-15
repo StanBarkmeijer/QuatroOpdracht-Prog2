@@ -16,12 +16,14 @@ public class DeleteTest {
 
     @BeforeAll
     static void createAccount() {
+//        Input
         CursistDAO cursistDAO = new CursistDAO();
 
         Cursist cursist = new Cursist("testaccount@test.com", "Test", "Test",
                 new Date(), "Test", "test", "Test",
                 19, "2951DC", "Test", "Test");
 
+//        Action
         cursistDAO.save(cursist);
     }
 
@@ -32,8 +34,12 @@ public class DeleteTest {
         @Test
         @DisplayName("Should delete account with email")
         public void shouldDeleteAccountWithEmail() {
+//            Input = BeforeAll
+
+//            Action
             boolean res = cursistDAO.deleteByEmail("testaccount@test.com");
 
+//            Output
             Assertions.assertTrue(res);
         }
 
@@ -46,8 +52,12 @@ public class DeleteTest {
         @Test
         @DisplayName("Should not delete account with invalid email")
         public void shouldDeleteAccountWithEmail() {
+//            Input = BeforeAll
+
+//            Action
             boolean res = cursistDAO.deleteByEmail("qwertyuiop");
 
+//            Output
             Assertions.assertFalse(res);
         }
 
