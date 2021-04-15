@@ -16,12 +16,14 @@ public class UpdateTest {
 
     @BeforeAll
     static void createAccount() {
+//        Input
         CursistDAO cursistDAO = new CursistDAO();
 
         Cursist cursist = new Cursist("testaccount@test.com", "Test", "Test",
                 new Date(), "Test", "test", "Test",
                 19, "2951DC", "Test", "Test");
 
+//        Action
         cursistDAO.save(cursist);
     }
 
@@ -32,6 +34,7 @@ public class UpdateTest {
         @Test
         @DisplayName("Should update account")
         public void shouldUpdateAccount() {
+//            Input
             Cursist cursist = cursistDAO.getByEmail("testaccount@test.com");
 
             int id = cursist.getCursistId();
@@ -41,14 +44,16 @@ public class UpdateTest {
                     new Date(), "Test", "test", "Test",
                     19, "2951DC", "Test", "Test");
 
+//            Action
             boolean res = cursistDAO.update(id, newCursist);
 
+//            Output
             Assertions.assertTrue(res);
 
             Cursist newFoundCursist = cursistDAO.get(id);
 
             Assertions.assertEquals(cursist.getFirstName(), newFoundCursist.getFirstName());
-            Assertions.assertEquals("accounttest@test.com", newFoundCursist.getEmail());
+            Assertions.assertEquals(oldMail, newFoundCursist.getEmail());
         }
 
     }
@@ -60,42 +65,51 @@ public class UpdateTest {
         @Test
         @DisplayName("Should return false with missing credential")
         public void shouldReturnFalseWithMissingCredential() {
+//            Input
             Cursist cursist = cursistDAO.getByEmail("testaccount@test.com");
             int id = cursist.getCursistId();
             Cursist newCursist = new Cursist("", "Test", "Test",
                     new Date(), "Test", "test", "Test",
                     19, "2951DC", "Test", "Test");
 
+//            Action
             boolean res = cursistDAO.update(id, newCursist);
 
+//            Output
             Assertions.assertFalse(res);
         }
 
         @Test
         @DisplayName("Should return false with wrong email format")
         public void shouldReturnFalseWithWrongEmailFormat() {
+//            Input
             Cursist cursist = cursistDAO.getByEmail("testaccount@test.com");
             int id = cursist.getCursistId();
             Cursist newCursist = new Cursist("wasd", "Test", "Test",
                     new Date(), "Test", "test", "Test",
                     19, "2951DC", "Test", "Test");
 
+//            Action
             boolean res = cursistDAO.update(id, newCursist);
 
+//            Output
             Assertions.assertFalse(res);
         }
 
         @Test
         @DisplayName("Should return false with wrong postal code format")
         public void shouldReturnFalseWithWrongPostalCodeFormat() {
+//            Input
             Cursist cursist = cursistDAO.getByEmail("testaccount@test.com");
             int id = cursist.getCursistId();
             Cursist newCursist = new Cursist("testaccount@test.com", "Test", "Test",
                     new Date(), "Test", "test", "Test",
                     19, "wasd", "Test", "Test");
 
+//            Action
             boolean res = cursistDAO.update(id, newCursist);
 
+//            Output
             Assertions.assertFalse(res);
         }
 
