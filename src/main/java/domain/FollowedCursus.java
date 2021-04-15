@@ -11,12 +11,14 @@ public class FollowedCursus {
     private int cursusId;
     private String identifier;
     private Date registrationDate;
+    private int contentId;
 
-    public FollowedCursus(int cursistId, int cursusId, String identifier, Date registrationDate) {
+    public FollowedCursus(int cursistId, int cursusId, String identifier, Date registrationDate, int contentId) {
         this.cursistId = cursistId;
         this.cursusId = cursusId;
         this.identifier = identifier;
         this.registrationDate = registrationDate;
+        this.contentId = contentId;
     }
 
     public FollowedCursus(ResultSet rs) throws SQLException {
@@ -25,6 +27,7 @@ public class FollowedCursus {
         this.cursusId = rs.getInt("CursusId");
         this.identifier = rs.getString("Identifier");
         this.registrationDate = rs.getDate("RegistrationDate");
+        this.contentId = rs.getInt("ContentID");
     }
 
     public int getFollowedCursusId() {
@@ -45,5 +48,9 @@ public class FollowedCursus {
 
     public Date getRegistrationDate() {
         return registrationDate;
+    }
+
+    public int getContentId() {
+        return contentId;
     }
 }

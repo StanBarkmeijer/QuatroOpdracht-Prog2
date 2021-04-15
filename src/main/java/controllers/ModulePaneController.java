@@ -41,6 +41,30 @@ public class ModulePaneController {
         this.nameContact.setText(module.getFirstNameContact() + " " + module.getLastNameContact());
         this.description.setText(module.getDescription());
         this.version.setText(module.getVersion());
+
+        contentViewedButton.setOnAction(x -> {
+            FollowedCursusDAO followedCursusDAO = new FollowedCursusDAO();
+
+            int cursistId = Preferences.userRoot().getInt("user", 0);
+
+            if (followedCursusDAO.followedFoundWithCursistIDAndCursusID(cursistId, module.getCursusId()) != null) {
+                ResponseHandler.handleError(Alert.AlertType.WARNING,
+                        "Content already followed",
+                        "You already followed the module: " + module.getTitle() + ", woops!");
+
+                return;
+            }
+
+            FollowedCursus toInsert = new FollowedCursus(cursistId, module.getCursusId(), "identifier", new Date(), module.getContentId());
+
+            boolean res = followedCursusDAO.save(toInsert);
+
+            if (res) {
+                ResponseHandler.handleError(Alert.AlertType.CONFIRMATION,
+                        "Content followed",
+                        "You followed the module: " + module.getTitle() + ", great job!");
+            }
+        });
     }
 
 }

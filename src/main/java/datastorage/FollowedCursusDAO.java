@@ -107,18 +107,45 @@ public class FollowedCursusDAO implements DAO<FollowedCursus> {
         return followedCursus;
     }
 
+    public FollowedCursus followedFoundWithCursistIDCursusIDandContentID(int cursistId, int cursusId, int contentId) {
+        FollowedCursus followedCursus = null;
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM FollowedCursus " +
+                    "WHERE CursistId=? " +
+                    "AND CursusID=? " +
+                    "AND ContentID=?");
+
+            query.setInt(1, cursistId);
+            query.setInt(2, cursusId);
+            query.setInt(3, contentId);
+
+            ResultSet rs = query.executeQuery();
+
+            rs.next();
+
+            followedCursus = new FollowedCursus(rs);
+        } catch (SQLException error) {
+            return null;
+        }
+
+        return followedCursus;
+    }
+
     @Override
     public boolean save(FollowedCursus followedCursus) {
         try {
             Connection connection = databaseConnect.getConnection();
             PreparedStatement query = connection.prepareStatement("INSERT INTO FollowedCursus " +
-                    "(CursistID, CursusID, Identifier, RegistrationDate)" +
-                    "VALUES (?, ?, ?, ?)");
+                    "(CursistID, CursusID, Identifier, RegistrationDate, ContentID)" +
+                    "VALUES (?, ?, ?, ?, ?)");
 
             query.setInt(1, followedCursus.getCursistId());
             query.setInt(2, followedCursus.getCursusId());
             query.setString(3, followedCursus.getIdentifier());
             query.setDate(4, new java.sql.Date(followedCursus.getRegistrationDate().getTime()));
+            query.setInt(5, followedCursus.getContentId());
 
             query.execute();
 

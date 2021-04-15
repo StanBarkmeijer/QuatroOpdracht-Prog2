@@ -31,6 +31,8 @@ public class WebcastPaneController {
     private Label nameOrganisation;
     @FXML
     private Hyperlink url;
+    @FXML
+    private Button contentViewedButton;
 
     private Webcast webcast;
 
@@ -54,6 +56,30 @@ public class WebcastPaneController {
                 ResponseHandler.handleError(Alert.AlertType.ERROR,
                         "Couldn't open the link",
                         "We're sorry. Please try it again later.");
+            }
+        });
+
+        contentViewedButton.setOnAction(x -> {
+            FollowedCursusDAO followedCursusDAO = new FollowedCursusDAO();
+
+            int cursistId = Preferences.userRoot().getInt("user", 0);
+
+            if (followedCursusDAO.followedFoundWithCursistIDCursusIDandContentID(cursistId, webcast.getCursusId(), webcast.getContentId()) != null) {
+                ResponseHandler.handleError(Alert.AlertType.WARNING,
+                        "Content already followed",
+                        "You already followed the webcast: " + webcast.getTitle() + ", woops!");
+
+                return;
+            }
+
+            FollowedCursus toInsert = new FollowedCursus(cursistId, webcast.getCursusId(), "identifier", new Date(), webcast.getContentId());
+
+            boolean res = followedCursusDAO.save(toInsert);
+
+            if (res) {
+                ResponseHandler.handleError(Alert.AlertType.CONFIRMATION,
+                        "Content followed",
+                        "You followed the webcast: " + webcast.getTitle() + ", great job!");
             }
         });
     }

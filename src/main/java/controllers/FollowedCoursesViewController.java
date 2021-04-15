@@ -15,8 +15,7 @@ import utils.ResponseHandler;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.prefs.Preferences;
 
 public class FollowedCoursesViewController {
@@ -31,7 +30,14 @@ public class FollowedCoursesViewController {
         List<FollowedCursus> followedContent = followedCursusDAO
                 .getFromUserID(Preferences.userRoot().getInt("user", 0));
 
+        Map<Integer, FollowedCursus> added = new HashMap<>();
+
         for (FollowedCursus cursus : followedContent) {
+            if (added.containsKey(cursus.getCursusId())) continue;
+            else {
+                added.put(cursus.getCursusId(), cursus);
+            }
+
             URL url = getClass().getResource("../ui/FollowedCoursePane.fxml");
             FXMLLoader loader = new FXMLLoader(url);
 

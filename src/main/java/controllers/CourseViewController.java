@@ -47,30 +47,6 @@ public class CourseViewController {
         this.courseSubject.setText(course.getCourseSubject());
         this.courseIntroduction.setText(course.getCourseIntroduction());
 
-        courseFollowedButton.setOnAction(x -> {
-            FollowedCursusDAO followedCursusDAO = new FollowedCursusDAO();
-
-            int cursistId = Preferences.userRoot().getInt("user", 0);
-
-            if (followedCursusDAO.followedFoundWithCursistIDAndCursusID(cursistId, course.getCourseId()) != null) {
-                ResponseHandler.handleError(Alert.AlertType.WARNING,
-                        "Content already followed",
-                        "You already followed the lesson: " + course.getCourseTitle() + ", woops!");
-
-                return;
-            }
-
-            FollowedCursus toInsert = new FollowedCursus(cursistId, course.getCourseId(), "identifier", new Date());
-
-            boolean res = followedCursusDAO.save(toInsert);
-
-            if (res) {
-                ResponseHandler.handleError(Alert.AlertType.CONFIRMATION,
-                        "Content followed",
-                        "You followed the course: " + course.getCourseTitle() + ", great job!");
-            }
-        });
-
         for (Content content : course.getContentList()) {
             if (content.getType().equals("Module")) {
                 URL url = getClass().getResource("../ui/ModulePane.fxml");
