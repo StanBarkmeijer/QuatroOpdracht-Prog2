@@ -9,7 +9,6 @@ public class SignUpValidator {
     String firstName;
     String lastName;
     String email;
-    Date birthDay;
     String street;
     String city;
     String country;
