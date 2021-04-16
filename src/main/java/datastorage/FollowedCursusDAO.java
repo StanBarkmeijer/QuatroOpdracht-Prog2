@@ -19,6 +19,37 @@ public class FollowedCursusDAO implements DAO<FollowedCursus> {
         this.databaseConnect = new DatabaseConnect();
     }
 
+
+    public List<FollowedCursus> getTop3Webcasts() {
+        List<FollowedCursus> contentList = new ArrayList<>();
+
+        try {
+            Connection connection = databaseConnect.getConnection();
+
+            final String webcastQuery = "SELECT *, COUNT(ContentID) AS 'ViewedCount'\n" +
+                    "FROM FollowedCursus\n" +
+                    "WHERE ContentID > 9999\n" +
+                    "ORDER BY COUNT(ContentID)";
+
+            PreparedStatement webcastStmt = connection.prepareStatement(webcastQuery);
+
+            ResultSet webcastRs = webcastStmt.executeQuery();
+
+            int i = 0;
+
+            while (webcastRs.next() && i < 3) {
+                contentList.add(new FollowedCursus(webcastRs));
+
+                i++;
+            }
+        } catch (SQLException error) {
+            error.printStackTrace();
+            ResponseHandler.handleError(Alert.AlertType.ERROR, "Couldn't get all courses", error.getMessage());
+        }
+
+        return contentList;
+    }
+
     @Override
     public List<FollowedCursus> getAll() {
         ArrayList<FollowedCursus> list = new ArrayList<>();

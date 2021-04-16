@@ -53,4 +53,16 @@ public class FollowedCursus {
     public int getContentId() {
         return contentId;
     }
+
+    @Override
+    public String toString() {
+        return "FollowedCursus{" +
+                "followedCursusId=" + followedCursusId +
+                ", cursistId=" + cursistId +
+                ", cursusId=" + cursusId +
+                ", identifier='" + identifier + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", contentId=" + contentId +
+                '}';
+    }
 }

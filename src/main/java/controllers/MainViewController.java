@@ -2,28 +2,28 @@ package controllers;
 
 import datastorage.CourseDAO;
 import datastorage.CursistDAO;
+import datastorage.FollowedCursusDAO;
+import datastorage.WebcastDAO;
 import domain.Course;
 import domain.Cursist;
+import domain.FollowedCursus;
+import domain.Webcast;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import utils.ResponseHandler;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.Preferences;
 
@@ -31,6 +31,7 @@ public class MainViewController {
 
     private CursistDAO cursistDAO;
     private CourseDAO courseDAO;
+    private FollowedCursusDAO followedCoursesDAO;
 
     @FXML
     private Label firstName;
@@ -50,6 +51,7 @@ public class MainViewController {
     public MainViewController() {
         this.cursistDAO = new CursistDAO();
         this.courseDAO = new CourseDAO();
+        this.followedCoursesDAO = new FollowedCursusDAO();
     }
 
     @FXML
@@ -170,5 +172,36 @@ public class MainViewController {
         Node node = loader.load();
 
         scrollPane.setContent(node);
+    }
+
+
+    public void mostViewedWebcasts(MouseEvent mouseEvent) throws IOException {
+        List<FollowedCursus> topThree = followedCoursesDAO.getTop3Webcasts();
+        List<Webcast> topThreeWebcasts = new ArrayList<>();
+
+        for (FollowedCursus followedCursus : topThree) {
+            int contentID = followedCursus.getContentId();
+
+            Webcast foundWebcast = new WebcastDAO().get(contentID);
+
+            topThreeWebcasts.add(foundWebcast);
+        }
+
+        VBox vBox = new VBox();
+
+        for (Webcast webcast : topThreeWebcasts) {
+            URL url = getClass().getResource("../ui/WebcastPane.fxml");
+
+            FXMLLoader loader = new FXMLLoader(url);
+
+            WebcastPaneController controller = new WebcastPaneController(webcast);
+
+            loader.setController(controller);
+            Node node = loader.load();
+
+            vBox.getChildren().add(node);
+        }
+
+        scrollPane.setContent(vBox);
     }
 }
