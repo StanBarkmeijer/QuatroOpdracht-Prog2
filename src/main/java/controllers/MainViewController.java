@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.prefs.Preferences;
 
 public class MainViewController {
@@ -96,7 +97,13 @@ public class MainViewController {
         button.setText("Search");
         button.setTextFill(Color.WHITE);
 
-        searchPart.getChildren().addAll(searchBar, button);
+        Button findSuggestedCourse = new Button();
+        findSuggestedCourse.setId("suggestedButton");
+        findSuggestedCourse.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #E76F51, #F69982);");
+        findSuggestedCourse.setText("Suggested course");
+        findSuggestedCourse.setTextFill(Color.WHITE);
+
+        searchPart.getChildren().addAll(searchBar, button, findSuggestedCourse);
 
         button.setOnAction(x -> {
             VBox contentBox = new VBox();
@@ -131,6 +138,33 @@ public class MainViewController {
             }
 
             scrollPane.setContent(contentBox);
+        });
+
+        findSuggestedCourse.setOnAction(x -> {
+            List<Course> courseList = courseDAO.getAll();
+
+            Random rand = new Random();
+            Course randomCourse = courseList.get(rand.nextInt(courseList.size()));
+
+            VBox vBox = new VBox();
+
+            URL url = getClass().getResource("../ui/CoursePreviewPane.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+
+            CoursePreviewPaneController controller = new CoursePreviewPaneController(scrollPane, randomCourse);
+
+            loader.setController(controller);
+            Node node = null;
+
+            try {
+                node = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            vBox.getChildren().add(node);
+
+            scrollPane.setContent(vBox);
         });
 
         VBox contentBox = new VBox();
