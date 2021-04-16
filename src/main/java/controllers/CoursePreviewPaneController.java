@@ -1,10 +1,6 @@
 package controllers;
 
-import datastorage.CourseDAO;
-import datastorage.CursistDAO;
-import domain.Content;
 import domain.Course;
-import domain.Cursist;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 
 public class CoursePreviewPaneController {
 

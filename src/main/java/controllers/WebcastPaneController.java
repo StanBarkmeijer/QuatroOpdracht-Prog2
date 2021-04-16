@@ -2,9 +2,7 @@ package controllers;
 
 import datastorage.FollowedCursusDAO;
 import domain.FollowedCursus;
-import domain.Module;
 import domain.Webcast;
-import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,9 +10,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import utils.ResponseHandler;
 
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.prefs.Preferences;
 

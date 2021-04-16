@@ -1,23 +1,16 @@
 package controllers;
 
-import datastorage.FollowedCursusDAO;
 import domain.Content;
 import domain.Course;
-import domain.FollowedCursus;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import utils.ResponseHandler;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.prefs.Preferences;
 
 public class CourseViewController {
 

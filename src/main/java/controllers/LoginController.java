@@ -2,20 +2,18 @@ package controllers;
 
 import datastorage.CursistDAO;
 import domain.Cursist;
-import javafx.scene.control.*;
-import utils.ResponseHandler;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import utils.ResponseHandler;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.prefs.Preferences;
 
 public class LoginController {
