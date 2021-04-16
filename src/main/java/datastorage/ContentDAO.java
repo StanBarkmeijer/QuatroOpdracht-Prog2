@@ -1,7 +1,6 @@
 package datastorage;
 
 import domain.Content;
-import domain.Course;
 import domain.Module;
 import domain.Webcast;
 import javafx.scene.control.Alert;
